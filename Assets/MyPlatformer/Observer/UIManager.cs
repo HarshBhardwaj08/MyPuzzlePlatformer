@@ -8,11 +8,22 @@ public class UIManager : MonoBehaviour,IObserver
 
     public Text Scoretext;
     public int score;
-   
-    public void getUpdate()
+    private void OnEnable()
     {
-        Debug.Log("UiUpdated");
-        score++;
-        Scoretext.text = "Score: " + score.ToString(); 
+        SignalManager.Instance.SubscribeToPublishers(this);
+    }
+    private void OnDisable()
+    {
+        SignalManager.Instance.UnSubscribeToPublishers(this);
+    }
+    public void getUpdate(string signal)
+     {
+        if(signal == "CoinCollected")
+        {
+            Debug.Log("UiUpdated");
+            score++;
+            Scoretext.text = "Score: " + score.ToString();
+        }
+        
     }
 }

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5101653228243992763}
   - component: {fileID: 6974472658406811661}
   - component: {fileID: 1682164895763032775}
-  - component: {fileID: 6557803073089042187}
   m_Layer: 0
   m_Name: Gem
   m_TagString: Coins
@@ -166,16 +165,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0cd7f116c026d4cbfad53d7d7a4b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6557803073089042187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4002881636079447570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55b1d4b2598401348b9a0cd083afc281, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coinSound: {fileID: 8300000, guid: cc90dc27dc00d9d488db4c35489dcd18, type: 3}

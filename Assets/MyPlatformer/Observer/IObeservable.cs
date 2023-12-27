@@ -6,5 +6,5 @@ public interface IObeservable
 {
     void add(IObserver observer);
     void remove(IObserver observer);
-    void Notify();
+    void Notify(string signal);
 }

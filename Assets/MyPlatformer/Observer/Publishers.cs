@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Publishers : MonoBehaviour, IObeservable
+public class Publishers : IObeservable
 { 
-    List<IObserver> observers = new List<IObserver>();
+  [SerializeField]  List<IObserver> observers = new List<IObserver>();
     public void add(IObserver observer)
     {
         observers.Add(observer);
@@ -14,17 +14,13 @@ public class Publishers : MonoBehaviour, IObeservable
         observers.Remove(observer);
     }
 
-    public void Notify()
-    {
-        pickup();
-    }
-
-   void pickup()
+    public void Notify(string signal)
     {
         foreach (IObserver observer in observers)
         {
-           observer.getUpdate();
+            observer.getUpdate(signal);
         }
     }
-   
+
+ 
 }
