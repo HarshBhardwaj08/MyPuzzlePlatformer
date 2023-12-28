@@ -26,13 +26,13 @@ public class PlayerSwitch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftAlt) )
-        {  
-           player2.enabled = true;
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            player2.enabled = true;
             followcam.Follow = player2.transform;
             player1.setVelocity(0, 0);
             player1.playerStateMachine.ChangeState(player1.idleState);
-           player1.enabled = false;
+            player1.enabled = false;
             count++;
         }
         else if (count == 2)
@@ -40,11 +40,15 @@ public class PlayerSwitch : MonoBehaviour
             player1.enabled = true;
             followcam.Follow = player1.transform;
             player2.setVelocity(0, 0);
+           
             player2.enabled = false;
             count = 0;
         }
-       
+    }
 
-
+    void switchPlayer(BasePlayer player , CinemachineVirtualCamera virtualCamera)
+    {
+        player.enabled = true;
+        virtualCamera.Follow = player.transform;
     }
 }

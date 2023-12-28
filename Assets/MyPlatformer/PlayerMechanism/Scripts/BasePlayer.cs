@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class BasePlayer : MonoBehaviour
 {
+    #region PlayerComponents
     public SpriteRenderer _spriteRenderer { get; set; }
     public Animator animator { get; set; }
     public Rigidbody2D rg2D { get;  set; }
+    #endregion
 
+    #region PlayerMovement
     public float moveSpeed;
     public float jumpforce;
     public int extraJump;
     public bool isGrd;
+    #endregion
 
     #region States
     public PlayerIdleState idleState { get; set; }
@@ -19,6 +23,7 @@ public class BasePlayer : MonoBehaviour
     public PlayerJump jumpstate { get; set; }
     public PlayerAirState airState { get;  set; }
     public PlayerStateMachine playerStateMachine { get; set; }
+    public PlayerAttackState attackState { get; set; }
     #endregion
 
   protected HellPlayer hellPlayer { get; set; }
@@ -26,6 +31,7 @@ public class BasePlayer : MonoBehaviour
 
     public LayerMask mask;
     public Transform groundcheckpoint;
+   
     public virtual void Awake()
     {
         playerStateMachine = new PlayerStateMachine();
@@ -33,7 +39,7 @@ public class BasePlayer : MonoBehaviour
         moveState = new PlayerMoveState(this, playerStateMachine, "Move");
         jumpstate = new PlayerJump(this, playerStateMachine, "Jump");
         airState = new PlayerAirState(this, playerStateMachine, "Jump");
-
+        attackState = new PlayerAttackState(this, playerStateMachine, "Attack");
     }
 
     public virtual void Start()
@@ -48,12 +54,18 @@ public class BasePlayer : MonoBehaviour
     {
         playerStateMachine.currentstate.PlayerUpdate();
         isGrd = IsGrounded();
+      
     }
-
+    
     public virtual void setVelocity(float x, float y) => rg2D.velocity = new Vector2(x, y);
 
     public virtual void flipsprite(bool isflip) => _spriteRenderer.flipX = isflip;
 
     public virtual bool IsGrounded() => Physics2D.OverlapCircle(groundcheckpoint.position, 0.2f, mask);
+
+    public virtual void Isattacking()
+    {
+        playerStateMachine.currentstate.IsAttacking();
+    }
 
 }

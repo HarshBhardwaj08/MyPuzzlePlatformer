@@ -30,4 +30,9 @@ public class HellPlayer : BasePlayer
     public override void flipsprite(bool isflip) => _spriteRenderer.flipX = isflip;
 
     public override bool IsGrounded() => Physics2D.OverlapCircle(groundcheckpoint.position, 0.2f, mask);
+
+    public override void Isattacking()
+    {
+        base.Isattacking();
+    }
 }

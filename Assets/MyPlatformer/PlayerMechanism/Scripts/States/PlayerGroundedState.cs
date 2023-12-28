@@ -23,10 +23,9 @@ public class PlayerGroundedState : PlayerState
     public override void PlayerUpdate()
     {
         base.PlayerUpdate();
-            if (Input.GetKeyDown(KeyCode.Space) &&  player.IsGrounded() == true)
-        {
-                stateMachine.ChangeState(player.jumpstate);
-                   
-        }
+        if (Input.GetKeyDown(KeyCode.Space) && player.IsGrounded() == true) { stateMachine.ChangeState(player.jumpstate); }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0)) { stateMachine.ChangeState(player.attackState); }
+      
     }
 }

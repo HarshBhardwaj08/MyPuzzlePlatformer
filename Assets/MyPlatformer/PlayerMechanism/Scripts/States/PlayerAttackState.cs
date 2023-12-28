@@ -21,6 +21,10 @@ public class PlayerAttackState : PlayerState
     public override void PlayerUpdate()
     {
         base.PlayerUpdate();
+        if(isAttacking== true)
+        {
+            stateMachine.ChangeState(player.idleState);
+        }
     }
     
 }
