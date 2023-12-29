@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Smasher : MonoBehaviour,IObserver
 {
-    public Rigidbody2D rigidbody2Ds;
+    Rigidbody2D rg2d;
     public Transform areaCollision;
     Vector3 initalPos;
     private void Awake()
     {
         initalPos = this.transform.position;
+        rg2d = GetComponent<Rigidbody2D>();
     }
     private void OnEnable()
     {
@@ -30,13 +31,14 @@ public class Smasher : MonoBehaviour,IObserver
     {
      Vector2 newPos = Vector2.MoveTowards(transform.position,areaCollision.position , 50f);
 
-        transform.position = newPos;
+        rg2d.MovePosition(newPos);
         SignalManager.Instance.Notify("CameraShake");
         Invoke("ResetPos", 2.0f);
     }
    void ResetPos()
     {
         Vector2 newPos = Vector2.MoveTowards(transform.position,initalPos , 50f );
-        transform.position = newPos;
+        rg2d.MovePosition(newPos);
+        //transform.position = newPos;
     }
 }

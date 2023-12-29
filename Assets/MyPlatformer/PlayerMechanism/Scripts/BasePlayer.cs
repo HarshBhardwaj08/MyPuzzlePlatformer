@@ -2,20 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasePlayer : MonoBehaviour
+public class BasePlayer :Entity
 {
-    #region PlayerComponents
-    public SpriteRenderer _spriteRenderer { get; set; }
-    public Animator animator { get; set; }
-    public Rigidbody2D rg2D { get;  set; }
-    #endregion
-
-    #region PlayerMovement
-    public float moveSpeed;
-    public float jumpforce;
-    public int extraJump;
-    public bool isGrd;
-    #endregion
+    
 
     #region States
     public PlayerIdleState idleState { get; set; }
@@ -29,11 +18,11 @@ public class BasePlayer : MonoBehaviour
   protected HellPlayer hellPlayer { get; set; }
   protected HeavenPlayer heavenPlayer { get; set; }  
 
-    public LayerMask mask;
-    public Transform groundcheckpoint;
+ 
    
-    public virtual void Awake()
+    public override void Awake()
     {
+        base.Awake();
         playerStateMachine = new PlayerStateMachine();
         idleState = new PlayerIdleState(this, playerStateMachine, "Idle");
         moveState = new PlayerMoveState(this, playerStateMachine, "Move");
@@ -42,26 +31,25 @@ public class BasePlayer : MonoBehaviour
         attackState = new PlayerAttackState(this, playerStateMachine, "Attack");
     }
 
-    public virtual void Start()
+    public override void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        rg2D = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        base.Start();
         playerStateMachine.Intialize(idleState);
     }
 
-   public virtual void Update()
+   public override void Update()
     {
+        base.Update();
         playerStateMachine.currentstate.PlayerUpdate();
         isGrd = IsGrounded();
       
     }
     
-    public virtual void setVelocity(float x, float y) => rg2D.velocity = new Vector2(x, y);
+    public override void setVelocity(float x, float y) => rg2D.velocity = new Vector2(x, y);
 
-    public virtual void flipsprite(bool isflip) => _spriteRenderer.flipX = isflip;
+    public override void flipsprite(bool isflip) => _spriteRenderer.flipX = isflip;
 
-    public virtual bool IsGrounded() => Physics2D.OverlapCircle(groundcheckpoint.position, 0.2f, mask);
+    public override bool IsGrounded() => Physics2D.OverlapCircle(groundcheckpoint.position, 0.2f, mask);
 
     public virtual void Isattacking()
     {

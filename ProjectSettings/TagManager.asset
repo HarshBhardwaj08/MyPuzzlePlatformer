@@ -42,3 +42,24 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Sky
+    uniqueID: 610001499
+    locked: 0
+  - name: Castle
+    uniqueID: 2917100939
+    locked: 0
+  - name: Level
+    uniqueID: 2012462015
+    locked: 0
+  - name: Traps
+    uniqueID: 3511250885
+    locked: 0
+  - name: Gem
+    uniqueID: 122264357
+    locked: 0
+  - name: Player
+    uniqueID: 3865217469
+    locked: 0
+  - name: Enemy
+    uniqueID: 1687579605
+    locked: 0
