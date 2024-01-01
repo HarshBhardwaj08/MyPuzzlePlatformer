@@ -41,7 +41,7 @@ public class BasePlayer :Entity
     {
         base.Update();
         playerStateMachine.currentstate.PlayerUpdate();
-        isGrd = IsGrounded();
+       
       
     }
     

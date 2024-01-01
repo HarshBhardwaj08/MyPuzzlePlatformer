@@ -5,30 +5,30 @@ using UnityEngine.Windows;
 
 public class EnemyState
 {
-    public EnemyStateMachine stateMachine;
+    public EnemyStateMachine enemystateMachine;
     public Enemy enemy;
     string animationAName;
-    bool triggredCalled;
+    // bool triggredCalled;
+    public bool flip;
     protected float stateTimer;
-
+    public float faceDir;
     public EnemyState(Enemy enemy , EnemyStateMachine enemyStateMachine , string animName)
     {
         this.enemy = enemy;
-        this.stateMachine = enemyStateMachine;
+        this.enemystateMachine = enemyStateMachine;
         this.animationAName = animName;
     }
 
 
     public virtual void playerEnter()
     {
-        triggredCalled = false;
-      
-
+       // triggredCalled = false;
+       enemy.animator.SetBool(animationAName, true);
     }
 
     public virtual void playerExit()
     {
-       
+       enemy.animator.SetBool(animationAName , false);
 
     }
 
@@ -36,7 +36,21 @@ public class EnemyState
     {
 
         stateTimer -= Time.deltaTime;
-    }
+        flipCHecker();
 
-    public virtual void IsAttacking() => triggredCalled = true;
+    }
+    void flipCHecker()
+    {
+        if (enemy.rg2D.velocity.x >= 0)
+        {
+            flip = true;
+            faceDir = 1;
+        }
+        else if (enemy.rg2D.velocity.x <= 0)
+        {
+            flip = false;
+            faceDir = -1;
+        }
+    }
+    //  public virtual void IsAttacking() => triggredCalled = true;
 }

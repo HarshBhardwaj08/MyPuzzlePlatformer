@@ -22,7 +22,7 @@ public class HellPlayer : BasePlayer
     {
         base.Update();
         playerStateMachine.currentstate.PlayerUpdate();
-        isGrd = IsGrounded();
+        
     }
 
     public override void setVelocity(float x, float y) => rg2D.velocity = new Vector2(x, y);

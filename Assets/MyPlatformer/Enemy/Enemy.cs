@@ -4,20 +4,41 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
-    protected EnemyStateMachine StateMachine { get; private set; }
+    protected EnemyStateMachine enemyStateMachine { get; private set; }
+    public EnemyState enemyState { get; set; }
+    public Transform playerDetected;
+    public float vision;
+    public bool playerSeen;
+    public LayerMask playerLayerMask; 
     public override void Awake()
-    {
+    { 
+       
         base.Awake();
+        enemyStateMachine = new EnemyStateMachine();
     }
     public override void Start()
     {
         base.Awake();
-        StateMachine = new EnemyStateMachine();
-
+      
     }
    public override void Update()
     {
         base.Update();
-        StateMachine.currentenemyState.PlayerUpdate();
+        enemyStateMachine.currentenemyState.PlayerUpdate();
+       
+
     }
+    public override void flipsprite(bool isflip)
+    {
+
+        if (isflip == true)
+        {
+            this.transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
+        }
+        else
+        {
+            this.transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
+        }
+    }
+ 
 }

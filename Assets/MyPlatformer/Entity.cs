@@ -10,7 +10,7 @@ public class Entity : MonoBehaviour
     public Rigidbody2D rg2D { get; set; }
     public float moveSpeed;
     public float jumpforce;
-    public bool isGrd;
+    public Transform wallCheckpoint;
     public LayerMask mask;
     public Transform groundcheckpoint;
     public virtual void Awake()
@@ -27,11 +27,12 @@ public class Entity : MonoBehaviour
     // Update is called once per frame
   public virtual  void Update()
     {
-        
+       
     }
     public virtual void setVelocity(float x, float y) => rg2D.velocity = new Vector2(x, y);
 
     public virtual void flipsprite(bool isflip) => _spriteRenderer.flipX = isflip;
 
     public virtual bool IsGrounded() => Physics2D.OverlapCircle(groundcheckpoint.position, 0.2f, mask);
+    public virtual bool IsWallDetected() => Physics2D.OverlapCircle(wallCheckpoint.position, 0.2f, mask);
 }

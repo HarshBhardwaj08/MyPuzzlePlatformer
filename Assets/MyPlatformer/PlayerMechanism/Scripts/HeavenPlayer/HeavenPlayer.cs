@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HeavenPlayer : BasePlayer
 {
+    public bool onGround;
      public override void Awake()
     {
         base.Awake();
@@ -18,7 +19,7 @@ public class HeavenPlayer : BasePlayer
     {    
         base.Update();
         playerStateMachine.currentstate.PlayerUpdate();
-        isGrd = IsGrounded();
+        onGround = IsGrounded();
     }
 
     public override void setVelocity(float x , float y) => rg2D.velocity = new Vector2(x , y);
