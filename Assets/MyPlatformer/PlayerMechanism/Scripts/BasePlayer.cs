@@ -18,8 +18,6 @@ public class BasePlayer :Entity
   protected HellPlayer hellPlayer { get; set; }
   protected HeavenPlayer heavenPlayer { get; set; }  
 
- 
-   
     public override void Awake()
     {
         base.Awake();
@@ -41,8 +39,6 @@ public class BasePlayer :Entity
     {
         base.Update();
         playerStateMachine.currentstate.PlayerUpdate();
-       
-      
     }
     
     public override void setVelocity(float x, float y) => rg2D.velocity = new Vector2(x, y);

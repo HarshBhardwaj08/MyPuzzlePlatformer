@@ -23,5 +23,9 @@ public class EnemyGroundedState : EnemyState
     public override void PlayerUpdate()
     {
         base.PlayerUpdate();
+        if (skeletonEnemy.isPlayerDetected() == true)
+        {
+            enemystateMachine.ChangeState(skeletonEnemy.enemyBattleState);
+        }
     }
 }

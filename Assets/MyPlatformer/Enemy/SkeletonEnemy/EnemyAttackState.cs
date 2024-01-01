@@ -24,5 +24,9 @@ public class EnemyAttackState : EnemyState
     public override void PlayerUpdate()
     {
         base.PlayerUpdate();
+        if(triggredCalled== true)
+        {
+            enemystateMachine.ChangeState(skeletonEnemy.enemyIdle);
+        }
     }
 }

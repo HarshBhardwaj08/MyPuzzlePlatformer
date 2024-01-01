@@ -8,13 +8,14 @@ public class Enemy : Entity
     public EnemyState enemyState { get; set; }
     public Transform playerDetected;
     public float vision;
-    public bool playerSeen;
+    protected bool playerSeen;
     public LayerMask playerLayerMask; 
     public override void Awake()
     { 
        
         base.Awake();
         enemyStateMachine = new EnemyStateMachine();
+        enemyState = new EnemyState();
     }
     public override void Start()
     {
@@ -40,5 +41,14 @@ public class Enemy : Entity
             this.transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
         }
     }
- 
+    
+    public virtual void onAttack()
+    {
+        enemyStateMachine.currentenemyState.IsAttacking(); 
+    }
+    public virtual RaycastHit2D isPlayerDetected()
+    {
+          return Physics2D.Raycast(playerDetected.position, Vector2.right * enemyState.faceDir, vision, playerLayerMask);
+
+    }
 }

@@ -3043,7 +3043,6 @@ MonoBehaviour:
   groundcheckpoint: {fileID: 367441445}
   playerDetected: {fileID: 703454920}
   vision: 3.74
-  playerSeen: 0
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 8
@@ -3051,6 +3050,8 @@ MonoBehaviour:
   playerDir: 0
   isGround: 0
   isWallDetected: 0
+  attackDistance: 2
+  distance: 0
 --- !u!61 &2112208575
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3086,8 +3087,8 @@ BoxCollider2D:
   m_Offset: {x: -0.20954955, y: -0.2768702}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.32, y: 0.44}
-    oldSize: {x: 2.6875, y: 2.3125}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.5, y: 2}
     newSize: {x: 1.5, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

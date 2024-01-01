@@ -8,10 +8,15 @@ public class EnemyState
     public EnemyStateMachine enemystateMachine;
     public Enemy enemy;
     string animationAName;
-    // bool triggredCalled;
+    public bool triggredCalled;
     public bool flip;
     protected float stateTimer;
     public float faceDir;
+
+    public EnemyState()
+    {
+
+    }
     public EnemyState(Enemy enemy , EnemyStateMachine enemyStateMachine , string animName)
     {
         this.enemy = enemy;
@@ -22,7 +27,7 @@ public class EnemyState
 
     public virtual void playerEnter()
     {
-       // triggredCalled = false;
+        triggredCalled = false;
        enemy.animator.SetBool(animationAName, true);
     }
 
@@ -39,7 +44,7 @@ public class EnemyState
         flipCHecker();
 
     }
-    void flipCHecker()
+   public virtual void flipCHecker()
     {
         if (enemy.rg2D.velocity.x >= 0)
         {
@@ -52,5 +57,5 @@ public class EnemyState
             faceDir = -1;
         }
     }
-    //  public virtual void IsAttacking() => triggredCalled = true;
+     public virtual void IsAttacking() => triggredCalled = true;
 }

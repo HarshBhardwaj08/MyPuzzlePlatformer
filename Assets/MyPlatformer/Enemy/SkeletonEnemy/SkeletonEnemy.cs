@@ -6,16 +6,21 @@ public class SkeletonEnemy : Enemy
 {
     public EnemyIdle enemyIdle;
     public EnemyMove enemyMove;
+    public EnemyAttackState enemyAttackState;
+    public EnemyBattleState enemyBattleState;
     public bool isFlip;
     public float playerDir;
     public bool isGround;
     public bool isWallDetected;
-
+    public float attackDistance;
+    public float distance;
     public override void Awake()
     {
         base.Awake();
         enemyIdle = new EnemyIdle(this,enemyStateMachine,"Idle",this);
         enemyMove = new EnemyMove(this, enemyStateMachine, "Walk", this);
+        enemyBattleState = new EnemyBattleState(this, enemyStateMachine, "Walk", this);
+        enemyAttackState = new EnemyAttackState(this, enemyStateMachine, "Attack", this);
     }
 
    
@@ -32,18 +37,12 @@ public class SkeletonEnemy : Enemy
        isGround = IsGrounded();
        isWallDetected = IsWallDetected();
         playerSeen = isPlayerDetected();
+        
     }
-    public virtual bool isPlayerDetected()
-    {   
-        if(enemyMove.faceDir > 0)
-        {
-            return Physics2D.Raycast(playerDetected.position, Vector2.left, vision, playerLayerMask);
-        }
-        else
-        {
-            return Physics2D.Raycast(playerDetected.position, Vector2.left, -vision, playerLayerMask);
-        }
+    
+    public override void onAttack()
+    {
+        base.onAttack();
+    }
 
-    }
-   
 }
