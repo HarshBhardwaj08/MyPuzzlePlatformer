@@ -7,33 +7,35 @@ public class Clone : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject player;
     public float cloneSpeed = 5f;
-
-   public  void Update()
+    float timer;
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        player = GameObject.Find("Player1").gameObject;
+    }
+    public void Update()
+    {
+        timer += Time.deltaTime;
+        if(timer >= 5)
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            
                 ClonePlayer();
-            
+                timer = 0;
         }
     }
 
     void ClonePlayer()
     {
        
-        GameObject clone = Instantiate(playerPrefab, player.transform.position,Quaternion.identity);
-
-    
-        Rigidbody2D cloneRb = clone.GetComponent<Rigidbody2D>();
+        GameObject clone = Instantiate(playerPrefab, player.transform.position ,player.transform.rotation);
         if(player.GetComponent<SpriteRenderer>().flipX == true)
         {
-            cloneRb.velocity = transform.right * cloneSpeed;
+            clone.GetComponent<SpriteRenderer>().flipX = true;
+            clone.GetComponent<Rigidbody2D>().AddForce( Vector2.right*cloneSpeed);
+        }else if (player.GetComponent<SpriteRenderer>().flipX == false)
+        {
+            clone.GetComponent<SpriteRenderer>().flipX = false;
+            clone.GetComponent<Rigidbody2D>().AddForce(Vector2.left  * cloneSpeed);
         }
-        else
-            cloneRb.velocity = (transform.right *-1 * cloneSpeed);
-
-
-
-       
+   
     }
 }

@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 7581474833418227125}
   - component: {fileID: 858776004866099451}
   - component: {fileID: 7046220062236888124}
-  - component: {fileID: 2394691360212277563}
   - component: {fileID: 3654890704043387938}
-  m_Layer: 0
+  - component: {fileID: 1580633411884385121}
+  m_Layer: 7
   m_Name: Clone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,20 +150,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &2394691360212277563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2570837900747995800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca87a7f31da26401bbe6bd2cbcd43677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 0}
-  cloneSpeed: 5
 --- !u!95 &3654890704043387938
 Animator:
   serializedVersion: 5
@@ -185,3 +171,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1580633411884385121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2570837900747995800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d2e39062203b124e93d61c6ea362cf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
