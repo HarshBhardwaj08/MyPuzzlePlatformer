@@ -8,12 +8,14 @@ public class SkeletonEnemy : Enemy
     public EnemyMove enemyMove;
     public EnemyAttackState enemyAttackState;
     public EnemyBattleState enemyBattleState;
+    public EnemyStunnedState enemyStunnedState;
     public bool isFlip;
     public float playerDir;
     public bool isGround;
     public bool isWallDetected;
     public float attackDistance;
     public float distance;
+   
     public override void Awake()
     {
         base.Awake();
@@ -21,6 +23,7 @@ public class SkeletonEnemy : Enemy
         enemyMove = new EnemyMove(this, enemyStateMachine, "Walk", this);
         enemyBattleState = new EnemyBattleState(this, enemyStateMachine, "Walk", this);
         enemyAttackState = new EnemyAttackState(this, enemyStateMachine, "Attack", this);
+        enemyStunnedState = new EnemyStunnedState(this, enemyStateMachine, "Hurt", this);
     }
 
    
@@ -29,6 +32,8 @@ public class SkeletonEnemy : Enemy
     {
         base.Start();
         enemyStateMachine.EnterState(enemyIdle);
+        initalColor = _spriteRenderer.color;
+
     }
 
     public override void Update()
@@ -36,7 +41,7 @@ public class SkeletonEnemy : Enemy
         base.Update();
        isGround = IsGrounded();
        isWallDetected = IsWallDetected();
-        playerSeen = isPlayerDetected();
+       playerSeen = isPlayerDetected();
         
     }
     
@@ -45,4 +50,12 @@ public class SkeletonEnemy : Enemy
         base.onAttack();
     }
 
+    public override void Damage()
+    {
+        base.Damage();
+        enemyStateMachine.ChangeState(this.enemyStunnedState);
+        setVelocity(knockback.x,knockback.y);
+      
+    }
+    
 }

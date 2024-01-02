@@ -11,6 +11,7 @@ public class PlayerState
     protected Rigidbody2D rg2d;
     protected bool flipSprite;
     protected bool isAttacking;
+    protected float stunnedTime;
 
     public PlayerState(BasePlayer player,PlayerStateMachine stateMachine , string animBoolName)
     {
@@ -37,7 +38,8 @@ public class PlayerState
     public virtual void PlayerUpdate()
     {
         InputX = Input.GetAxisRaw("Horizontal");
-        flipSprite = (InputX >= 0) ? true : false;
+        if(InputX != 0)
+        flipSprite = (InputX >= 0);
      
     }
     public virtual void IsAttacking() => isAttacking = true;

@@ -57,5 +57,8 @@ public class EnemyState
             faceDir = -1;
         }
     }
+    
+    
      public virtual void IsAttacking() => triggredCalled = true;
+
 }

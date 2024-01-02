@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAttackState : EnemyState
+public class EnemyStunnedState : EnemyState
 {
     SkeletonEnemy skeletonEnemy;
-
-    public EnemyAttackState(Enemy enemy, EnemyStateMachine enemyStateMachine, string animName,SkeletonEnemy skeletonEnemy) : base(enemy, enemyStateMachine, animName)
+    public EnemyStunnedState(Enemy enemy, EnemyStateMachine enemyStateMachine, string animName,SkeletonEnemy skeletonEnemy) : base(enemy, enemyStateMachine, animName)
     {
         this.skeletonEnemy = skeletonEnemy;
     }
@@ -14,6 +13,7 @@ public class EnemyAttackState : EnemyState
     public override void playerEnter()
     {
         base.playerEnter();
+        stateTimer = 1f;
     }
 
     public override void playerExit()
@@ -24,10 +24,11 @@ public class EnemyAttackState : EnemyState
     public override void PlayerUpdate()
     {
         base.PlayerUpdate();
-        if(triggredCalled== true)
+        stateTimer -= Time.deltaTime;
+        if(stateTimer < 0)
         {
-            skeletonEnemy.enemyBattleState.checkflip();
             enemystateMachine.ChangeState(skeletonEnemy.enemyIdle);
         }
+
     }
 }

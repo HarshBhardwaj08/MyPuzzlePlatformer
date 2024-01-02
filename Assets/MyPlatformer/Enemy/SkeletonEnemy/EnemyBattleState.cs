@@ -28,19 +28,26 @@ public class EnemyBattleState : EnemyState
         base.PlayerUpdate();
         if (enemy.isPlayerDetected())
         {
+           
             if (enemy.isPlayerDetected().distance < skeletonEnemy.attackDistance)
+                if(Vector2.Distance(skeletonEnemy.transform.position, skeletonEnemy.transform.position) < skeletonEnemy.attackDistance)
             {
 
-                skeletonEnemy.setVelocity(0, 0);
+                    enemy.ZeroVelocity();
                 enemystateMachine.ChangeState(skeletonEnemy.enemyAttackState);
+                    return;
             }
-        }
+            else if (Vector2.Distance(skeletonEnemy.transform.position, skeletonEnemy.transform.position) > 7.0f)
+                {
+                    enemystateMachine.ChangeState(skeletonEnemy.enemyIdle);
+                }
+        } 
 
        
 
         checkflip();
     }
-   void checkflip()
+ public virtual void checkflip()
     {
 
         if (player.transform.position.x > skeletonEnemy.transform.position.x)

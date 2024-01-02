@@ -13,6 +13,7 @@ public class HeavenPlayer : BasePlayer
     {
         base.Start();
         playerStateMachine.Intialize(idleState);
+        initalColor = _spriteRenderer.color;
     }
 
     public override void Update()
@@ -20,6 +21,7 @@ public class HeavenPlayer : BasePlayer
         base.Update();
         playerStateMachine.currentstate.PlayerUpdate();
         onGround = IsGrounded();
+       
     }
 
     public override void setVelocity(float x , float y) => rg2D.velocity = new Vector2(x , y);
@@ -27,6 +29,18 @@ public class HeavenPlayer : BasePlayer
     public override void flipsprite(bool isflip) => _spriteRenderer.flipX = isflip;
    
     public override bool IsGrounded() => Physics2D.OverlapCircle(groundcheckpoint.position , 0.2f, mask);
+
+    public override void Damage()
+    {
+        base.Damage();
+        playerStateMachine.ChangeState(this.playerHurtState);
+       
+        
+    }
+    void IntialColor()
+    {
+        _spriteRenderer.color = initalColor;
+    }
 
     public override void Isattacking()
     {

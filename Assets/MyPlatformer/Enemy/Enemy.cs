@@ -9,6 +9,7 @@ public class Enemy : Entity
     public Transform playerDetected;
     public float vision;
     protected bool playerSeen;
+    public Vector2 knockback;
     public LayerMask playerLayerMask; 
     public override void Awake()
     { 
@@ -20,6 +21,7 @@ public class Enemy : Entity
     public override void Start()
     {
         base.Awake();
+      
       
     }
    public override void Update()
@@ -48,7 +50,29 @@ public class Enemy : Entity
     }
     public virtual RaycastHit2D isPlayerDetected()
     {
-          return Physics2D.Raycast(playerDetected.position, Vector2.right * enemyState.faceDir, vision, playerLayerMask);
+        return Physics2D.Raycast(playerDetected.position, Vector2.right * enemyState.faceDir, vision, playerLayerMask);
 
+    }
+   
+    public virtual void ZeroVelocity() => rg2D.velocity = new Vector2(0, 0);
+    public override void AttackArea()
+    {
+
+        Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(attackpoint.transform.position, AttackRadius);
+
+        foreach (var hit in collider2Ds)
+        {
+            if (hit.gameObject.tag == "Player")
+                hit.gameObject.GetComponent<BasePlayer>().Damage();
+        }
+    }
+    public override void Damage()
+    {
+        Debug.Log(this.gameObject + "50");
+    }
+    public override void OnDrawGizmos()
+    {
+       
+        Gizmos.DrawWireSphere(attackpoint.transform.position, AttackRadius);
     }
 }
