@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Clone : MonoBehaviour
+public class Clone : Skill
 {
     public GameObject playerPrefab;
     public GameObject player;
@@ -12,7 +12,7 @@ public class Clone : MonoBehaviour
     {
         player = GameObject.Find("Player1").gameObject;
     }
-    public void Update()
+    public override  void  Update()
     {
         timer += Time.deltaTime;
         if(timer >= 5)
@@ -27,15 +27,16 @@ public class Clone : MonoBehaviour
     {
        
         GameObject clone = Instantiate(playerPrefab, player.transform.position ,player.transform.rotation);
-        if(player.GetComponent<SpriteRenderer>().flipX == true)
+        if (player.GetComponent<SpriteRenderer>().flipX == true)
         {
             clone.GetComponent<SpriteRenderer>().flipX = true;
-            clone.GetComponent<Rigidbody2D>().AddForce( Vector2.right*cloneSpeed);
-        }else if (player.GetComponent<SpriteRenderer>().flipX == false)
+            clone.GetComponent<Rigidbody2D>().AddForce(Vector2.right * cloneSpeed);
+        }
+        else if (player.GetComponent<SpriteRenderer>().flipX == false)
         {
             clone.GetComponent<SpriteRenderer>().flipX = false;
-            clone.GetComponent<Rigidbody2D>().AddForce(Vector2.left  * cloneSpeed);
+            clone.GetComponent<Rigidbody2D>().AddForce(Vector2.left * cloneSpeed);
         }
-   
+
     }
 }

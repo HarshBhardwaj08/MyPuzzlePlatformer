@@ -37,7 +37,7 @@ public class PlayerState
 
     public virtual void PlayerUpdate()
     {
-        InputX = Input.GetAxisRaw("Horizontal");
+        InputX = Input.GetAxis("Horizontal");
         if(InputX != 0)
         flipSprite = (InputX >= 0);
      

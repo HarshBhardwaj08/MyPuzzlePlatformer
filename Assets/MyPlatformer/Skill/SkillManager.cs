@@ -10,17 +10,20 @@ public class SkillManager : MonoBehaviour
         get
         {
             if (_instance == null)
-                _instance = new SkillManager();
+                _instance = GameObject.FindGameObjectWithTag("SkillManager").GetComponent<SkillManager>();
             return _instance;
 
         }
     }
 
     private static SkillManager _instance;
+    BasePlayer baseplayer;
     Clone clone;
-
-    private void Start()
+    public SwordSkill skill { get; set ; }
+    private void Awake()
     {
         clone = GetComponent<Clone>();
+        skill = GetComponent<SwordSkill>();
     }
+    
 }

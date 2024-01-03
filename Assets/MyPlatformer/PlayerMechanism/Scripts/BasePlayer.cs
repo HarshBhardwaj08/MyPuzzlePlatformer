@@ -14,6 +14,8 @@ public class BasePlayer :Entity
     public PlayerStateMachine playerStateMachine { get; set; }
     public PlayerAttackState attackState { get; set; }
     public PlayerHurtState playerHurtState { get; set; }
+    public PlayerSwordThrowState PlayerSwordThrowState { get; set; }
+    public PlayerCatchState PlayerCatchState { get; set; }
     #endregion
   
   protected HellPlayer hellPlayer { get; set; }
@@ -29,10 +31,13 @@ public class BasePlayer :Entity
         airState = new PlayerAirState(this, playerStateMachine, "Jump");
         attackState = new PlayerAttackState(this, playerStateMachine, "Attack");
         playerHurtState = new PlayerHurtState(this, playerStateMachine, "Hurt");
+        PlayerSwordThrowState = new PlayerSwordThrowState(this, playerStateMachine, "ThrowSword");
+        PlayerCatchState = new PlayerCatchState(this, playerStateMachine, "CatchSword");
     }
 
     public override void Start()
     {
+        
         base.Start();
         playerStateMachine.Intialize(idleState);
     }
@@ -72,5 +77,10 @@ public class BasePlayer :Entity
     {
         base.OnDrawGizmos();
         Gizmos.DrawWireSphere(attackpoint.transform.position, AttackRadius);
+    }
+
+    public virtual void Swordthrow()
+    {
+        SkillManager.Instance.skill.CreateSword(this);
     }
 }

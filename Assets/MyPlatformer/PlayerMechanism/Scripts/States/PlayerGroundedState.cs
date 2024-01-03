@@ -26,6 +26,10 @@ public class PlayerGroundedState : PlayerState
         if (Input.GetKeyDown(KeyCode.Space) && player.IsGrounded() == true) { stateMachine.ChangeState(player.jumpstate); }
 
         if (Input.GetKeyDown(KeyCode.Mouse0)) { stateMachine.ChangeState(player.attackState); }
+        if(Input.GetKey(KeyCode.Mouse1))
+        {
+            stateMachine.ChangeState(player.PlayerSwordThrowState);
+        }
       
     }
 }
