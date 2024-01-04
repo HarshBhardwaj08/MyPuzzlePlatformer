@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BasePlayer :Entity
 {
-    
+    public GameObject throwpoint;
 
     #region States
     public PlayerIdleState idleState { get; set; }
@@ -81,6 +81,6 @@ public class BasePlayer :Entity
 
     public virtual void Swordthrow()
     {
-        SkillManager.Instance.skill.CreateSword(this);
+      //  SkillManager.Instance.skill.CreateSword(this, -1);
     }
 }

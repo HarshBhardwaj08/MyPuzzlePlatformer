@@ -6,7 +6,7 @@ public class PlayerState
 {
     protected PlayerStateMachine stateMachine;
     public BasePlayer player;
-    protected float InputX;
+    public float InputX;
     string animboolname;
     protected Rigidbody2D rg2d;
     protected bool flipSprite;

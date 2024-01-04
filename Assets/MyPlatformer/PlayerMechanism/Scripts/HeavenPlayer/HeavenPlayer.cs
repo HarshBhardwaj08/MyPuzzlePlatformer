@@ -46,6 +46,6 @@ public class HeavenPlayer : BasePlayer
     {
         base.Isattacking();
     }
-    public override void Swordthrow() => SkillManager.Instance.skill.CreateSword(this);
+    public override void Swordthrow() => SkillManager.Instance.skill.CreateSword(this,1);
 
 }
