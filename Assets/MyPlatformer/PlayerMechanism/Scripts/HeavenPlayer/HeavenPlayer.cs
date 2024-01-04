@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class HeavenPlayer : BasePlayer
 {
+    public static HeavenPlayer heavenPlayers;
     public bool onGround;
+    public Transform shootParent;
     public override void Awake()
     {
         base.Awake();
+        heavenPlayers = this;
     }
     public override void Start()
     {
         base.Start();
         playerStateMachine.Intialize(idleState);
         initalColor = _spriteRenderer.color;
+       
     }
 
     public override void Update()
@@ -21,7 +25,7 @@ public class HeavenPlayer : BasePlayer
         base.Update();
         playerStateMachine.currentstate.PlayerUpdate();
         onGround = IsGrounded();
-
+        SkillManager.Instance.skill.ThowSword(this);
     }
 
     public override void setVelocity(float x, float y) => rg2D.velocity = new Vector2(x, y);

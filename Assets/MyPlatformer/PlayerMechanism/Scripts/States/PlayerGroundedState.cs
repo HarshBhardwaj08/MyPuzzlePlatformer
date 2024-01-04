@@ -29,6 +29,7 @@ public class PlayerGroundedState : PlayerState
         if(Input.GetKey(KeyCode.Mouse1))
         {
             stateMachine.ChangeState(player.PlayerSwordThrowState);
+            SkillManager.Instance.skill.DotsActive(true);
         }
       
     }

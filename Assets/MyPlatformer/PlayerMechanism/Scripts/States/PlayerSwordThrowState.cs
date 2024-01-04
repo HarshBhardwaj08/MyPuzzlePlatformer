@@ -12,7 +12,7 @@ public class PlayerSwordThrowState : PlayerState
     {
         base.playerEnter();
         //sword
-       
+        
     }
 
     public override void playerExit()
