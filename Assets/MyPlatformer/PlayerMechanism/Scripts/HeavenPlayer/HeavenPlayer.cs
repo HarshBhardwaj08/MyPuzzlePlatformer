@@ -15,6 +15,10 @@ public class HeavenPlayer : BasePlayer
     public override void Start()
     {
         base.Start();
+        if (ExtractJson.instance.data != null)
+        {
+            transform.position = ExtractJson.instance.data.checkpoint.position;
+        }
         playerStateMachine.Intialize(idleState);
         initalColor = _spriteRenderer.color;
        

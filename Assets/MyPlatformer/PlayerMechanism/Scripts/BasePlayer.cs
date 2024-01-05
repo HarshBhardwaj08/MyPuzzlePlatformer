@@ -37,7 +37,7 @@ public class BasePlayer :Entity
 
     public override void Start()
     {
-        
+       
         base.Start();
         playerStateMachine.Intialize(idleState);
     }
