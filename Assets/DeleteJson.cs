@@ -6,10 +6,16 @@ using UnityEngine.UI;
 
 public class DeleteJson : MonoBehaviour
 {
-    string path = "/Users/harshbharadwaj/Documents/GitHub/MyPuzzlePlatformer/Assets" + "/PlayerData.json";
+ 
+    private string fileName = "PlayerData.json";
+
+    private string filePath;
+
     private void Start()
     {
-      
+       
+        filePath = Path.Combine(Application.persistentDataPath, fileName);
+
         Button deleteButton = GetComponent<Button>();
 
         if (deleteButton != null)
@@ -25,18 +31,16 @@ public class DeleteJson : MonoBehaviour
 
     private void DeleteJsonFile()
     {
-        
-        if (File.Exists(path))
+        if (File.Exists(filePath))
         {
-            File.Delete(path);
-            Debug.Log("JSON file deleted: " + path);
+            File.Delete(filePath);
+            Debug.Log("JSON file deleted: " + filePath);
 
-        
             CloseGameplayWindow();
         }
         else
         {
-            Debug.LogWarning("JSON file not found: " + path);
+            Debug.LogWarning("JSON file not found: " + filePath);
         }
     }
 

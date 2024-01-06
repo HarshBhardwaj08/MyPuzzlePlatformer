@@ -23,7 +23,7 @@ public class Audio : MonoBehaviour, IObserver
     }
     public void getUpdate(string signal)
     {
-        if(signal == "CoinCollected")
+        if(signal == "Collectables")
         PlayCoinSound();
 
     }

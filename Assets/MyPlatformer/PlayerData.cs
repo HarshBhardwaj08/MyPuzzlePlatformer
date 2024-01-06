@@ -6,6 +6,6 @@ public class PlayerData
 {
     public Transform checkpoint;
     public int gemCollected;
-
+    public int cystalCollected;
 }
 

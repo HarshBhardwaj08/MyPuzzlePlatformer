@@ -1,20 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class ExtractJson : MonoBehaviour
 {
     public static ExtractJson instance;
     public PlayerData data;
+
     void Awake()
     {
         instance = this;
-        string jsonData = System.IO.File.ReadAllText("/Users/harshbharadwaj/Documents/GitHub/MyPuzzlePlatformer/Assets" + "/PlayerData.json");
-
-        // Convert JSON back to C# object
-        data = JsonUtility.FromJson<PlayerData>(jsonData);
-        Debug.Log(data.checkpoint.position);
+        LoadPlayerData();
     }
 
-   
+    void LoadPlayerData()
+    {
+        string filePath = Path.Combine(Application.persistentDataPath, "PlayerData.json");
+
+        
+        if (File.Exists(filePath))
+        {
+            string jsonData = System.IO.File.ReadAllText(filePath);
+
+            
+            data = JsonUtility.FromJson<PlayerData>(jsonData);
+
+            Debug.Log("Player data loaded from JSON at: " + filePath);
+            Debug.Log(data.checkpoint.position);
+        }
+        else
+        {
+            Debug.LogWarning("Player data file not found at: " + filePath);
+        }
+    }
+
+
 }

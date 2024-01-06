@@ -9,8 +9,8 @@ public class Coin : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             SignalManager.Instance.Notify("CoinCollected");
-         // Destroy(this.gameObject);
-          this.gameObject.SetActive(false); 
+           Destroy(this.gameObject);
+         // this.gameObject.SetActive(false); 
         }
     }
 }

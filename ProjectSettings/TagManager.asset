@@ -7,6 +7,7 @@ TagManager:
   - Coins
   - Enemy
   - SkillManager
+  - Cystals
   layers:
   - Default
   - TransparentFX
@@ -56,7 +57,7 @@ TagManager:
   - name: Traps
     uniqueID: 3511250885
     locked: 0
-  - name: Gem
+  - name: Collectables
     uniqueID: 122264357
     locked: 0
   - name: Player
