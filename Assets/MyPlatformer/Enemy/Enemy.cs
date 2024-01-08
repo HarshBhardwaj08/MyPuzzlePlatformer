@@ -11,7 +11,11 @@ public class Enemy : Entity
     protected bool playerSeen;
     public Vector2 knockback;
     public LayerMask playerLayerMask;
+    public float playerDir;
+    [HideInInspector]
     public bool freeze;
+    
+   
     public override void Awake()
     { 
        

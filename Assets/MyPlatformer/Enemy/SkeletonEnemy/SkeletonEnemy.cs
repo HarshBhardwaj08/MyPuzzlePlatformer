@@ -10,7 +10,7 @@ public class SkeletonEnemy : Enemy
     public EnemyBattleState enemyBattleState;
     public EnemyStunnedState enemyStunnedState;
     public bool isFlip;
-    public float playerDir;
+  
     public bool isGround;
     public bool isWallDetected;
     public float attackDistance;

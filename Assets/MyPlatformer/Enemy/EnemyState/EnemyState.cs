@@ -42,7 +42,7 @@ public class EnemyState
 
         stateTimer -= Time.deltaTime;
         flipCHecker();
-
+        enemy.playerDir = faceDir;
     }
    public virtual void flipCHecker()
     {

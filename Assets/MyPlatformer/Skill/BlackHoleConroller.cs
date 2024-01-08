@@ -51,9 +51,21 @@ public class BlackHoleController : MonoBehaviour,IObserver
     {
        if(signal == "AttackClone")
         {
-           for(int i = 0; i <= enemies.Count; i++)
+           for(int i = 0; i <= enemies.Count-i; i++)
             {
-                GameObject clones = Instantiate(Clones, enemies[i].transform.position , Quaternion.identity);
+                if (enemies[i].GetComponent<SkeletonEnemy>().playerDir > 0)
+                {
+                    GameObject clones = Instantiate(Clones, enemies[i].transform.position , Quaternion.identity);
+                  
+                }
+                else
+                {
+                    GameObject clones = Instantiate(Clones, enemies[i].transform.position, Quaternion.identity);
+                    clones.transform.Rotate (0, 180, 0);
+                  
+                }
+               
+
             }
 
            

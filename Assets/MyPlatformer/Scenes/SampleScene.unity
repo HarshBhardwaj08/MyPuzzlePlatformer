@@ -641,6 +641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5395a9f7b830046eca42bf8986dd179e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Clones: {fileID: 2570837900747995800, guid: dfdeed0ee4e844535a60e0271abb558c, type: 3}
   hotkeysPrefabs: {fileID: 1993444461823224356, guid: fbee989ecb41c4e489828e66d6ed638b, type: 3}
   keyCodeslist: 76000000790000006a0000006f000000
   maxSize: 8
@@ -4686,7 +4687,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8802800516534899410, guid: 65bb88079f11d5c4194b8c60eab790d0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.5565414
+      value: -1.44
       objectReference: {fileID: 0}
     - target: {fileID: 8802800516534899410, guid: 65bb88079f11d5c4194b8c60eab790d0, type: 3}
       propertyPath: m_LocalPosition.y
