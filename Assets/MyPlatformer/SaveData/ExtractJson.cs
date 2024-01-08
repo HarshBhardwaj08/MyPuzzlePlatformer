@@ -7,10 +7,13 @@ public class ExtractJson : MonoBehaviour
 {
     public static ExtractJson instance;
     public PlayerData data;
-
     void Awake()
-    {
-        instance = this;
+    {  
+        if(instance == null)
+        {
+            instance = this;
+        }
+       
         LoadPlayerData();
     }
 
@@ -22,10 +25,7 @@ public class ExtractJson : MonoBehaviour
         if (File.Exists(filePath))
         {
             string jsonData = System.IO.File.ReadAllText(filePath);
-
-            
             data = JsonUtility.FromJson<PlayerData>(jsonData);
-
             Debug.Log("Player data loaded from JSON at: " + filePath);
             Debug.Log(data.checkpoint.position);
         }

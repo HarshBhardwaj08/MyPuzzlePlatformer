@@ -7,9 +7,12 @@ public class CystalManager : UIManager
     public override void Awake()
     {
         base.Awake();
-       
         score = 0;
-
+        if(ExtractJson.instance.data != null)
+        {
+            score = ExtractJson.instance.data.cystalCollected;
+            Scoretext.text = "Score: " + score.ToString();
+        }
     }
     public override void OnEnable()
     {
@@ -24,7 +27,6 @@ public class CystalManager : UIManager
 
             if (signal == "CystalCollected")
             {
-           
                 int cystalPoints = ScoreKeepers.instance.CystalPoints;
                 score = cystalPoints + score;
                 Scoretext.text = "Score: " + score.ToString();

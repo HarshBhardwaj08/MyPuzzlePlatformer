@@ -7,9 +7,13 @@ public class CoinManager : UIManager
     public override void Awake()
     {
         base.Awake();
-      
         score = 0;
-       
+        if (ExtractJson.instance.data != null)
+        {
+            score = ExtractJson.instance.data.gemCollected;
+            Scoretext.text = "Score: " + score.ToString();
+        }
+
     }
     private void Start()
     {
