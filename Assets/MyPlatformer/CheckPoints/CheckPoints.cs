@@ -22,7 +22,11 @@ public class CheckPoints : MonoBehaviour
     {
         PlayerData playerData = new PlayerData();
         playerData.checkpoint = this.transform;
-        playerData.gemCollected = coinManger.GetComponent<CoinManager>().getCoinScore();
+       // playerData.gemCollected = coinManger.GetComponent<CoinManager>().getCoinScore();
+        var instancceNew = (CoinManager)CoinManager.instance;
+        var playerscore = instancceNew.getCoinScore();
+        playerData.gemCollected = playerscore; 
+
         playerData.cystalCollected = CystalManager.GetComponent<CystalManager>().getCystalScore();
         string filePath = Path.Combine(Application.persistentDataPath, "PlayerData.json");
         var jsonString = JsonUtility.ToJson(playerData);

@@ -39,6 +39,11 @@ public class SkeletonEnemy : Enemy
     public override void Update()
     {
         base.Update();
+
+        if(freeze == true)
+        {
+            enemyStateMachine.ChangeState(this.enemyIdle);
+        }
        isGround = IsGrounded();
        isWallDetected = IsWallDetected();
        playerSeen = isPlayerDetected();

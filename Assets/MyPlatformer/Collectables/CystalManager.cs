@@ -6,7 +6,7 @@ public class CystalManager : UIManager
 {
     public override void Awake()
     {
-        base.Awake();
+       // base.Awake();
         score = 0;
         if(ExtractJson.instance.data != null)
         {

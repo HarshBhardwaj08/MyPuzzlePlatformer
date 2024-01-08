@@ -8,6 +8,7 @@ public class CloneController : MonoBehaviour
     Animator animator;
     SpriteRenderer _SpriteRenderer;
     Enemy enemy;
+    float waitTime;
     private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
@@ -19,6 +20,8 @@ public class CloneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        waitTime += Time.deltaTime;
+        if(waitTime >1.0f)
         MoveClone();
     }
 

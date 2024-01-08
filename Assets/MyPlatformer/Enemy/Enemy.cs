@@ -10,7 +10,8 @@ public class Enemy : Entity
     public float vision;
     protected bool playerSeen;
     public Vector2 knockback;
-    public LayerMask playerLayerMask; 
+    public LayerMask playerLayerMask;
+    public bool freeze;
     public override void Awake()
     { 
        
@@ -27,7 +28,11 @@ public class Enemy : Entity
    public override void Update()
     {
         base.Update();
-        enemyStateMachine.currentenemyState.PlayerUpdate();
+        if(freeze == false)
+        {
+            enemyStateMachine.currentenemyState.PlayerUpdate();
+        }
+       
        
 
     }
@@ -55,6 +60,11 @@ public class Enemy : Entity
     }
    
     public virtual void ZeroVelocity() => rg2D.velocity = new Vector2(0, 0);
+
+    public virtual void freezeEnemy(bool freeze)
+    {
+        this.freeze = freeze;
+    }
     public override void AttackArea()
     {
 
@@ -66,6 +76,7 @@ public class Enemy : Entity
                 hit.gameObject.GetComponent<BasePlayer>().Damage();
         }
     }
+    
     public override void Damage()
     {
         Debug.Log(this.gameObject + "50");

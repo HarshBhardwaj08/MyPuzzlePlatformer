@@ -18,12 +18,12 @@ public class Clone : Skill
         if(timer >= 5)
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-                ClonePlayer();
+                ClonePlayer(player);
                 timer = 0;
         }
     }
 
-    void ClonePlayer()
+    void ClonePlayer(GameObject player)
     {
        
         GameObject clone = Instantiate(playerPrefab, player.transform.position ,player.transform.rotation);
