@@ -1,13 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class CoinManager : UIManager
+public class CoinManager : SingleteornClass<CoinManager>
 {
-    public override void Awake()
+    int score;
+    public Text Scoretext;
+    protected override void Awake()
     {
         base.Awake();
         score = 0;
+        
+
+    }
+    private void Start()
+    {
         if (ExtractJson.instance.data != null)
         {
             score = ExtractJson.instance.data.gemCollected;
@@ -15,38 +24,29 @@ public class CoinManager : UIManager
         }
 
     }
-    private void Start()
+    public  void OnEnable()
     {
-       
-    }
-    public override void OnEnable()
-    {
-        base.OnEnable();
-        SignalManager.Instance.SubscribeToPublishers(this);
+
+        SignalManager.Instance.Subscribe<GemsCollectedSignal>(onCoinCollected);
     }
 
-    public override void getUpdate(string signal)
+    public void OnDisable()
     {
-        base.getUpdate(signal);
 
-        if (signal == "CoinCollected")
-        {
-          
-            int gempoints = ScoreKeepers.instance.GemPoints;
-            score = score + gempoints;
-            Scoretext.text = "Score: " + score.ToString();
-            SignalManager.Instance.Notify("Collectables");
-
-        }
+        SignalManager.Instance.Unsubscribe<GemsCollectedSignal>(onCoinCollected);
     }
-    public int getCoinScore()
+
+    private void onCoinCollected(GemsCollectedSignal signal)
+    {
+        score = signal.GemPoints + score;
+        //Send a sigbal to update UI
+        Scoretext.text = "Score: " + score.ToString();
+
+    }
+    public int getGemsScore()
     {
         return score;
     }
-    public override void OnDisable()
-    {
-        base.OnDisable();
-        SignalManager.Instance.UnSubscribeToPublishers(this);
-    }
+   
 
 }

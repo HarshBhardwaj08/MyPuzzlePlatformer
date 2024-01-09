@@ -8,9 +8,9 @@ public class Coin : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            SignalManager.Instance.Notify("CoinCollected");
-           Destroy(this.gameObject);
-         // this.gameObject.SetActive(false); 
+
+            SignalManager.Instance.Fire(new GemsCollectedSignal() { GemPoints = ScoreKeepers.instance.GemPoints});
+            Destroy(this.gameObject);
         }
     }
 }

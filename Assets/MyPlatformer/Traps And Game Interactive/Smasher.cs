@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Smasher : MonoBehaviour,IObserver
+public class Smasher : MonoBehaviour
 {
     Rigidbody2D rg2d;
     public Transform areaCollision;
@@ -14,12 +14,12 @@ public class Smasher : MonoBehaviour,IObserver
     }
     private void OnEnable()
     {
-        SignalManager.Instance.SubscribeToPublishers(this);
+      //  SignalManager.Instance.SubscribeToPublishers(this);
     }
 
     private void OnDisable()
     {
-        SignalManager.Instance.UnSubscribeToPublishers(this);
+      //  SignalManager.Instance.UnSubscribeToPublishers(this);
     }
 
     public void getUpdate(string signal)
@@ -32,7 +32,7 @@ public class Smasher : MonoBehaviour,IObserver
      Vector2 newPos = Vector2.MoveTowards(transform.position,areaCollision.position , 50f);
 
         rg2d.MovePosition(newPos);
-        SignalManager.Instance.Notify("CameraShake");
+    //    SignalManager.Instance.Notify("CameraShake");
         Invoke("ResetPos", 2.0f);
     }
    void ResetPos()

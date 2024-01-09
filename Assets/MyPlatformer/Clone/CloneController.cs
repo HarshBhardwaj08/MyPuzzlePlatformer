@@ -21,8 +21,14 @@ public class CloneController : MonoBehaviour
     void Update()
     {
         waitTime += Time.deltaTime;
-        if(waitTime >1.0f)
-        MoveClone();
+
+        if(waitTime > 3.0f)
+        {
+            MoveClone();
+        }
+           
+        
+        
     }
 
     private void MoveClone()
@@ -45,7 +51,7 @@ public class CloneController : MonoBehaviour
            
            
         }
-        Destroy(this.gameObject, 3.0f);
+        Destroy(this.gameObject, 5.0f);
     }
    
 

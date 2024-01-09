@@ -7,7 +7,7 @@ using UnityEngine;
 public class CheckPoints : MonoBehaviour
 {
     public Sprite CheckpointspriteOn,CheckpointSpriteOff;
-    public GameObject CystalManager;
+  //  public GameObject CystalManager;
     public GameObject coinManger;
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -22,12 +22,9 @@ public class CheckPoints : MonoBehaviour
     {
         PlayerData playerData = new PlayerData();
         playerData.checkpoint = this.transform;
-       // playerData.gemCollected = coinManger.GetComponent<CoinManager>().getCoinScore();
-        var instancceNew = (CoinManager)CoinManager.instance;
-        var playerscore = instancceNew.getCoinScore();
-        playerData.gemCollected = playerscore; 
 
-        playerData.cystalCollected = CystalManager.GetComponent<CystalManager>().getCystalScore();
+        playerData.gemCollected = CoinManager.Instance.getGemsScore();
+        playerData.cystalCollected = CystalManager.Instance.getCystalScore();
         string filePath = Path.Combine(Application.persistentDataPath, "PlayerData.json");
         var jsonString = JsonUtility.ToJson(playerData);
         File.WriteAllText(filePath, jsonString);

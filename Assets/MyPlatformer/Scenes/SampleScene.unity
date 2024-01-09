@@ -644,10 +644,12 @@ MonoBehaviour:
   Clones: {fileID: 2570837900747995800, guid: dfdeed0ee4e844535a60e0271abb558c, type: 3}
   hotkeysPrefabs: {fileID: 1993444461823224356, guid: fbee989ecb41c4e489828e66d6ed638b, type: 3}
   keyCodeslist: 76000000790000006a0000006f000000
+  minSize: 0
   maxSize: 8
   growSpeed: 2
   canGrow: 0
   enemies: []
+  blackHoleHotKeys: []
 --- !u!58 &107352213
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1170,6 +1172,7 @@ GameObject:
   - component: {fileID: 704651855}
   - component: {fileID: 704651854}
   - component: {fileID: 704651857}
+  - component: {fileID: 704651858}
   m_Layer: 5
   m_Name: GemScore
   m_TagString: Untagged
@@ -1251,6 +1254,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Scoretext: {fileID: 704651854}
+--- !u!114 &704651858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704651853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eac9255d01224f9a850eb1a22e8aa18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &718028849
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4684,6 +4699,10 @@ PrefabInstance:
     - target: {fileID: 6107987315954461922, guid: 65bb88079f11d5c4194b8c60eab790d0, type: 3}
       propertyPath: m_Name
       value: Skeleton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802800516534899410, guid: 65bb88079f11d5c4194b8c60eab790d0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8802800516534899410, guid: 65bb88079f11d5c4194b8c60eab790d0, type: 3}
       propertyPath: m_LocalPosition.x

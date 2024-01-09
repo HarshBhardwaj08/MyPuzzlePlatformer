@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class ShakeCamera : MonoBehaviour,IObserver
+public class ShakeCamera : MonoBehaviour
 {
     public CinemachineVirtualCamera cinemachineVirtualCamera; 
     public float shakeIntensity = 1.0f;
     public float shakeDuration = 0.5f;
     private void OnEnable()
     {
-        SignalManager.Instance.SubscribeToPublishers(this);
+       // SignalManager.Instance.SubscribeToPublishers(this);
     }
 
     private void OnDisable()
     {
-        SignalManager.Instance.UnSubscribeToPublishers(this);
+       // SignalManager.Instance.UnSubscribeToPublishers(this);
     }
 
     void Start()

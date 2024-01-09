@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class ExtractJson : MonoBehaviour
+public class ExtractJson : SingleteornClass<ExtractJson>
 {
     public static ExtractJson instance;
     public PlayerData data;
-    void Awake()
-    {  
-        if(instance == null)
-        {
-            instance = this;
-        }
-       
+    protected override void Awake()
+    {
+        base.Awake();
         LoadPlayerData();
     }
+
 
     void LoadPlayerData()
     {

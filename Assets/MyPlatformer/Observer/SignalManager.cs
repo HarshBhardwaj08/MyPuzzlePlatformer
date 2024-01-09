@@ -1,38 +1,60 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class SignalManager 
+public class SignalManager
 {
+    private static SignalManager instance;
     public static SignalManager Instance
     {
         get
         {
             if (instance == null)
-                instance = new SignalManager() ;
+            {
+                instance = new SignalManager();
+            }
             return instance;
-
         }
     }
-    
-    private static SignalManager instance;
-    
-    Publishers publishers = new Publishers();
-   
 
-    public void SubscribeToPublishers(IObserver observer)
+    private Dictionary<Type, List<Action<object>>> signals = new Dictionary<Type, List<Action<object>>>();
+
+ 
+    public void Subscribe<T>(Action<T> listener) where T : class
     {
-        publishers.add(observer);
+        Type eventType = typeof(T);
+        if (!signals.ContainsKey(eventType))
+        {
+            signals[eventType] = new List<Action<object>>();
+        }
 
+        signals[eventType].Add(obj => {
+            listener((obj as T));
+        });
     }
-    public void UnSubscribeToPublishers(IObserver observer)
+
+    public void Unsubscribe<T>(Action<T> listener) where T : class
     {
-        publishers.remove(observer);
+        Type eventType = typeof(T);
+        if (signals.ContainsKey(eventType))
+        {
+            signals[eventType].Remove(obj => listener(obj as T));
+        }
     }
 
-    public void Notify(string St)
+    public void Fire<T>(T signal) where T : class
     {
-        publishers.Notify(St);
+        Type eventType = typeof(T);
+        if (signals.ContainsKey(eventType))
+        {
+            foreach (var listener in signals[eventType])
+            {
+                listener.Invoke(signal);
+            }
+        }
     }
 }
+
+
 

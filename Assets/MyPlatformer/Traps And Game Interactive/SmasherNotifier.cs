@@ -10,7 +10,7 @@ public class SmasherNotifier : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            SignalManager.Instance.Notify("Smasher");
+          //  SignalManager.Instance.Notify("Smasher");
            
         }
        
