@@ -403,6 +403,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 2568078709517328548, guid: d7d84b1c2a798431e94d9e0c71610264, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 2718847337778346677, guid: d7d84b1c2a798431e94d9e0c71610264, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -1670,6 +1674,7 @@ GameObject:
   - component: {fileID: 891201174}
   - component: {fileID: 891201173}
   - component: {fileID: 891201176}
+  - component: {fileID: 891201177}
   m_Layer: 0
   m_Name: SkillManger
   m_TagString: SkillManager
@@ -1741,6 +1746,21 @@ MonoBehaviour:
   dotsPrefabs: {fileID: 8215904999234897135, guid: 7feef139051304f36abeb5facf36891e, type: 3}
   dotsparent: {fileID: 2002907248}
   offset: {x: 0, y: 0}
+--- !u!114 &891201177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891201172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 283433bc4aa04d340941350cc194609a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Knifes: {fileID: 7658811705114769651, guid: d744236f447dbff46bb0098f49e1e5fb, type: 3}
+  transformKnife: {fileID: 2034856789}
+  power: 20
 --- !u!4 &917388463 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 307878706390268986, guid: ea7ea145ead069d48997e184b1935018, type: 3}
@@ -1859,7 +1879,7 @@ GameObject:
   - component: {fileID: 1131742048}
   m_Layer: 0
   m_Name: Levels
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3608,6 +3628,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 80340271741535538, guid: bd2138714914642ffb5a5b671659bd09, type: 3}
   m_PrefabInstance: {fileID: 7167818103376620874}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &2034856789 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5652783442549595327, guid: bd2138714914642ffb5a5b671659bd09, type: 3}
+  m_PrefabInstance: {fileID: 7167818103376620874}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2041159687
 GameObject:
   m_ObjectHideFlags: 0
@@ -4105,6 +4130,10 @@ PrefabInstance:
     - target: {fileID: 2568078709517328548, guid: d7d84b1c2a798431e94d9e0c71610264, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2568078709517328548, guid: d7d84b1c2a798431e94d9e0c71610264, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 2718847337778346677, guid: d7d84b1c2a798431e94d9e0c71610264, type: 3}
       propertyPath: m_Layer
