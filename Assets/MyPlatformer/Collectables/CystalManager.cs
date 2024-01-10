@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class CystalManager : SingleteornClass<CystalManager>
 {
     int score;
-    public Text Scoretext;
     protected override void Awake()
     {
         base.Awake();
@@ -32,9 +31,10 @@ public class CystalManager : SingleteornClass<CystalManager>
 
     public void OnCystalCollected(CystalCollectedSignal signal)
     {
-        Debug.Log("Working");
+        
         score = signal.count + score;
-        Scoretext.text = "Score: " + score.ToString();
+        SignalManager.Instance.Fire(new UpdateCystalUI() { CystalScore = score});
+        SignalManager.Instance.Fire(new AudioNotify());
        
     }
 

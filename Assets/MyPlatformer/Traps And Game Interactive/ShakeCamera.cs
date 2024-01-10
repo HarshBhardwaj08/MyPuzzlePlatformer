@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using System;
 
 public class ShakeCamera : MonoBehaviour
 {
@@ -10,12 +11,17 @@ public class ShakeCamera : MonoBehaviour
     public float shakeDuration = 0.5f;
     private void OnEnable()
     {
-       // SignalManager.Instance.SubscribeToPublishers(this);
+        SignalManager.Instance.Subscribe<CameraShakerSignal>(getUpdate);
+    }
+
+    private void getUpdate(CameraShakerSignal signal)
+    {
+        ShakesCamera();
     }
 
     private void OnDisable()
     {
-       // SignalManager.Instance.UnSubscribeToPublishers(this);
+        SignalManager.Instance.Unsubscribe<CameraShakerSignal>(getUpdate);
     }
 
     void Start()
@@ -49,14 +55,6 @@ public class ShakeCamera : MonoBehaviour
         {
             noise.m_AmplitudeGain = 0f;
             noise.m_FrequencyGain = 0f;
-        }
-    }
-
-    public void getUpdate(string signal)
-    {
-       if(signal == "CameraShake")
-        {
-            ShakesCamera();
         }
     }
 }

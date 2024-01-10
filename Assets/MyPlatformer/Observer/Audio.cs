@@ -11,20 +11,22 @@ public class Audio : MonoBehaviour
     {
         if (SignalManager.Instance != null) 
         {
-            SignalManager.Instance.Subscribe<CystalCollectedSignal>(PlayCoinSound);
+            SignalManager.Instance.Subscribe<AudioNotify>(PlayCoinSound);
         }
     }
 
-    private void PlayCoinSound(CystalCollectedSignal signal)
+    private void PlayCoinSound(AudioNotify notify)
     {
-        AudioSource.PlayClipAtPoint(coinSound, transform.position);
+           AudioSource.PlayClipAtPoint(coinSound, transform.position);
     }
+
+  
 
     private void OnDisable()
     {
         if(SignalManager.Instance != null)
         {
-            SignalManager.Instance.Unsubscribe <CystalCollectedSignal>(PlayCoinSound);
+            SignalManager.Instance.Unsubscribe <AudioNotify>(PlayCoinSound);
         }
       
     }

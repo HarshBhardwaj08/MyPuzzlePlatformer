@@ -8,7 +8,7 @@ public class Cystal : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            SignalManager.Instance.Fire(new CystalCollectedSignal() { count = ScoreKeepers.instance.CystalPoints });
+            SignalManager.Instance.Fire(new CystalCollectedSignal() { count = 1 });
             Destroy(this.gameObject);
         }
     }

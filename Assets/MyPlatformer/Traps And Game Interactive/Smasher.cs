@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,17 +15,17 @@ public class Smasher : MonoBehaviour
     }
     private void OnEnable()
     {
-      //  SignalManager.Instance.SubscribeToPublishers(this);
+        SignalManager.Instance.Subscribe<SmasherNoify>(getUpdate);
+    }
+
+    private void getUpdate(SmasherNoify noify)
+    {
+        { smash(); }
     }
 
     private void OnDisable()
     {
-      //  SignalManager.Instance.UnSubscribeToPublishers(this);
-    }
-
-    public void getUpdate(string signal)
-    {
-        if (signal == "Smasher") { smash(); }
+        SignalManager.Instance.Unsubscribe<SmasherNoify>(getUpdate);
     }
    
     void smash()
@@ -32,7 +33,7 @@ public class Smasher : MonoBehaviour
      Vector2 newPos = Vector2.MoveTowards(transform.position,areaCollision.position , 50f);
 
         rg2d.MovePosition(newPos);
-    //    SignalManager.Instance.Notify("CameraShake");
+        SignalManager.Instance.Fire(new CameraShakerSignal());
         Invoke("ResetPos", 2.0f);
     }
    void ResetPos()

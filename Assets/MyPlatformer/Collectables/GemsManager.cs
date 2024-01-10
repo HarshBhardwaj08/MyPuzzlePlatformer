@@ -4,23 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CoinManager : SingleteornClass<CoinManager>
+public class GemsManager : SingleteornClass<GemsManager>
 {
     int score;
-    public Text Scoretext;
+    
     protected override void Awake()
     {
         base.Awake();
         score = 0;
-        
-
     }
     private void Start()
     {
         if (ExtractJson.instance.data != null)
         {
             score = ExtractJson.instance.data.gemCollected;
-            Scoretext.text = "Score: " + score.ToString();
+           // Scoretext.text = "Score: " + score.ToString();
         }
 
     }
@@ -39,9 +37,8 @@ public class CoinManager : SingleteornClass<CoinManager>
     private void onCoinCollected(GemsCollectedSignal signal)
     {
         score = signal.GemPoints + score;
-        //Send a sigbal to update UI
-        Scoretext.text = "Score: " + score.ToString();
-
+        SignalManager.Instance.Fire(new UpdateGemsUISignal() { gemScore = score });
+        SignalManager.Instance.Fire(new AudioNotify());
     }
     public int getGemsScore()
     {

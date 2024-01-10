@@ -18,7 +18,7 @@ public class BouncePad : MonoBehaviour
             player = collision.gameObject.GetComponent<BasePlayer>();
             animator.SetBool("Bounce", true);
             player.rg2D.AddForce(Vector2.up*jumpHeight, ForceMode2D.Impulse);
-            player.playerStateMachine.ChangeState(player.airState);
+            player.playerStateMachine.ChangeState(player.moveState);
            
         }
     }

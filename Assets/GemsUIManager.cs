@@ -1,18 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class GemsUIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Text Scoretext;
+    private void Awake()
     {
         
     }
-
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        SignalManager.Instance.Subscribe<UpdateGemsUISignal>(UpdateGemsUI);
+    }
+
+    private void UpdateGemsUI(UpdateGemsUISignal signal)
+    {
+        Scoretext.text = "Gems : " + signal.gemScore.ToString();
     }
 }
