@@ -13,6 +13,15 @@ public class KnifeThrowSkills : MonoBehaviour
     private float timer = 0;
     private bool isThrow;
     private Animator animator;
+    Vector3 camSize;
+    private void Awake()
+    {
+      
+    }
+    private void Start()
+    {
+        camSize = CalculateViewportSize();
+    }
     void Update()
     {
         timer += Time.deltaTime;
@@ -36,16 +45,34 @@ public class KnifeThrowSkills : MonoBehaviour
             }
             timer = 0;
         }
+        if (Vector2.Distance(Player.transform.position, knifeDetails[count].transform.position) <= camSize.x)
+        {
+            isThrow = true;
+        }
+        else
+        {
+            isThrow = false;          
+        }
        
         if (Input.GetKeyUp(KeyCode.E))
-        {
-            animator.SetTrigger("Teleport");
-            StartCoroutine(WaitForTeleport(0.5f));
-            isThrow = false;
-          
+        {   
+            if(isThrow == true)
+            {
+                animator.SetTrigger("Teleport");
+                StartCoroutine(WaitForTeleport(0.5f));
+            }
         }
+       
+      
     }
-
+    public Vector3 CalculateViewportSize()
+    {
+        Camera mainCamera = Camera.main;
+        float viewportWidth = mainCamera.orthographicSize * 2 * mainCamera.aspect;
+        float viewportHeight = mainCamera.orthographicSize * 2;
+        Vector3 viewportSize = new Vector3(viewportWidth, viewportHeight, 0f);
+        return viewportSize;
+    }
 
     private void KnifeThrow(GameObject knife,float dir)
     {

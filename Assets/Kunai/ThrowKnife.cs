@@ -16,7 +16,7 @@ public class ThrowKnife : MonoBehaviour
         if(collision.gameObject.tag != "Player") 
         {  
             rg2d.velocity = Vector2.zero;  
-           rg2d.isKinematic = true;
+            rg2d.isKinematic = true;
             rg2d.simulated = false;
             this.transform.parent = collision.transform;
         }
