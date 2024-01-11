@@ -17,7 +17,7 @@ public class HeavenPlayer : BasePlayer
         base.Start();
         if (ExtractJson.instance.data != null)
         {
-            transform.position = ExtractJson.instance.data.checkpoint.position;
+          //  transform.position = ExtractJson.instance.data.checkpoint.position;
         }
         playerStateMachine.Intialize(idleState);
         initalColor = _spriteRenderer.color;

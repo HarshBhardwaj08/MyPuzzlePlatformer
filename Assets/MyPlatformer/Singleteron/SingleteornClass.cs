@@ -39,7 +39,7 @@ public class SingleteornClass<T> : MonoBehaviour where T : Component
         }
 
         _instance = this as T;
-        Debug.Log("singleton awake called " + _instance + "gameObject");
+    //    Debug.Log("singleton awake called " + _instance + "gameObject");
 
     }
 }

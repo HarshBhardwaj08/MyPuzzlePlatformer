@@ -5,12 +5,16 @@ using UnityEngine;
 public class ThrowKnife : MonoBehaviour
 {
     Rigidbody2D rg2d;
+    public Vector3 distanceOfKnife;
 
     private void Awake()
     {
         rg2d = GetComponent<Rigidbody2D>();
     }
-
+    private void Update()
+    {
+        distanceOfKnife = transform.position;
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag != "Player") 

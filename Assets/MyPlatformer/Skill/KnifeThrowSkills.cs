@@ -9,22 +9,25 @@ public class KnifeThrowSkills : MonoBehaviour
     [SerializeField] private Transform transformKnife;
     [SerializeField] private float power;
     public List<GameObject> knifeDetails = new List<GameObject>();
-    int count = -1;
+    [SerializeField] private int count = 0;
     private float timer = 0;
     private bool isThrow;
     private Animator animator;
-    Vector3 camSize;
-    private void Awake()
-    {
-      
-    }
+    public Vector3 camSize;
+   
     private void Start()
     {
-        camSize = CalculateViewportSize();
+        //camSize = CalculateViewportSize();
     }
     void Update()
     {
         timer += Time.deltaTime;
+        Debug.Log(isThrow);
+        KnifeThrow();
+    }
+
+    private void KnifeThrow()
+    {
         if (Input.GetKeyDown(KeyCode.RightAlt) && timer > 5.0f)
         {
             isThrow = true;
@@ -45,33 +48,37 @@ public class KnifeThrowSkills : MonoBehaviour
             }
             timer = 0;
         }
-        if (Vector2.Distance(Player.transform.position, knifeDetails[count].transform.position) <= camSize.x)
+
+        
+        
+
+        if (Input.GetKeyUp(KeyCode.E) )
         {
-            isThrow = true;
-        }
-        else
-        {
-            isThrow = false;          
-        }
-       
-        if (Input.GetKeyUp(KeyCode.E))
-        {   
-            if(isThrow == true)
+            for(int i=0;i < knifeDetails.Count; i++)
             {
+                if (IsObjectOutOfFOV(knifeDetails[i].transform.position))
+                {
+                    isThrow = true;
+                }
+                else
+                {
+                    isThrow = false;
+                }
                 animator.SetTrigger("Teleport");
-                StartCoroutine(WaitForTeleport(0.5f));
+                StartCoroutine(WaitForTeleport(0.5f, i));
             }
         }
-       
-      
     }
-    public Vector3 CalculateViewportSize()
+
+    bool IsObjectOutOfFOV(Vector3 objectPosition)
     {
         Camera mainCamera = Camera.main;
-        float viewportWidth = mainCamera.orthographicSize * 2 * mainCamera.aspect;
-        float viewportHeight = mainCamera.orthographicSize * 2;
-        Vector3 viewportSize = new Vector3(viewportWidth, viewportHeight, 0f);
-        return viewportSize;
+        Vector3 screenPoint = mainCamera.WorldToViewportPoint(objectPosition);
+        if (screenPoint.x > 0f && screenPoint.x < 1f )
+        {
+            return true;
+        }
+        return false;
     }
 
     private void KnifeThrow(GameObject knife,float dir)
@@ -79,13 +86,13 @@ public class KnifeThrowSkills : MonoBehaviour
         Rigidbody2D rb2d = knife.GetComponent<Rigidbody2D>();
         animator = knife.GetComponent<Animator>();
         rb2d.velocity = new Vector2(power*dir, rb2d.velocity.y);
-
-    }
-    private IEnumerator WaitForTeleport(float sec)
+        knifeDetails.Remove(knife);
+    } 
+    private IEnumerator WaitForTeleport(float sec, int i)
     {
         yield return new WaitForSeconds(sec);
-        Player.transform.position = knifeDetails[count].transform.position ;
-       
-
+        
+            Player.transform.position = knifeDetails[i].transform.position;
+        knifeDetails.Remove(this.knifeDetails[i]);
     }
 }

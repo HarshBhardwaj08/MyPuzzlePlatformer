@@ -23,8 +23,8 @@ public class ExtractJson : SingleteornClass<ExtractJson>
         {
             string jsonData = System.IO.File.ReadAllText(filePath);
             data = JsonUtility.FromJson<PlayerData>(jsonData);
-            Debug.Log("Player data loaded from JSON at: " + filePath);
-            Debug.Log(data.checkpoint.position);
+            //Debug.Log("Player data loaded from JSON at: " + filePath);
+           // Debug.Log(data.checkpoint.position);
         }
         else
         {

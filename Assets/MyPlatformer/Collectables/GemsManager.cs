@@ -17,7 +17,7 @@ public class GemsManager : SingleteornClass<GemsManager>
     {
         if (ExtractJson.instance.data != null)
         {
-            score = ExtractJson.instance.data.gemCollected;
+            //score = ExtractJson.instance.data.gemCollected;
            //Scoretext.text = "Score: " + score.ToString();
         }
 
