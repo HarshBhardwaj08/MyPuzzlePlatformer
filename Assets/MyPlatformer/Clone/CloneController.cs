@@ -26,9 +26,7 @@ public class CloneController : MonoBehaviour
         {
             MoveClone();
         }
-           
-        
-        
+         
     }
 
     private void MoveClone()
