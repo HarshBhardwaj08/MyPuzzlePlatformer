@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class KnifeThrowSkills : MonoBehaviour 
 {
     public GameObject Knifes;
     public GameObject Player;
+    public Image directionIndicator;
     [SerializeField] private Transform transformKnife;
     [SerializeField] private float power;
     public List<GameObject> knifeDetails = new List<GameObject>();
@@ -19,6 +21,7 @@ public class KnifeThrowSkills : MonoBehaviour
         timer += Time.deltaTime;
         Debug.Log(isThrow);
         KnifeThrow();
+        UpdateDirectionIndicator();
     }
 
     private void KnifeThrow()
@@ -45,16 +48,35 @@ public class KnifeThrowSkills : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.E))
         {
-            for (int i = knifeDetails.Count - 1; i >= 0; i--)
+            if (knifeDetails.Count > 0)
             {
-                if (IsObjectOutOfFOV(knifeDetails[i].transform.position))
+                int closestKnifeIndex = FindClosestKnifeIndex();
+                if (closestKnifeIndex != -1 && IsObjectOutOfFOV(knifeDetails[closestKnifeIndex].transform.position))
                 {
-                    animator = knifeDetails[i].GetComponent<Animator>();
+                    animator = knifeDetails[closestKnifeIndex].GetComponent<Animator>();
                     animator.SetTrigger("Teleport");
-                    StartCoroutine(WaitForTeleport(0.5f, i));
+                    StartCoroutine(WaitForTeleport(0.5f, closestKnifeIndex));
                 }
             }
         }
+    }
+
+    private int FindClosestKnifeIndex()
+    {
+        int closestIndex = -1;
+        float closestDistance = 1000f;
+
+        for (int i = 0; i < knifeDetails.Count; i++)
+        {
+            float distance = Vector3.Distance(Player.transform.position, knifeDetails[i].transform.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestIndex = i;
+            }
+        }
+
+        return closestIndex;
     }
 
     bool IsObjectOutOfFOV(Vector3 objectPosition)
@@ -76,5 +98,22 @@ public class KnifeThrowSkills : MonoBehaviour
         yield return new WaitForSeconds(sec);
         Player.transform.position = knifeDetails[i].transform.position;
         knifeDetails.RemoveAt(i);
+    }
+
+    private void UpdateDirectionIndicator()
+    {
+        if (knifeDetails.Count > 0)
+        {
+            for (int i = 0; i < knifeDetails.Count; i++)
+            {
+                float distance = Vector3.Distance(Player.transform.position, knifeDetails[i].transform.position);
+                Vector3 closestKnifeDirection = knifeDetails[i].transform.position - Player.transform.position;
+                float angle = Mathf.Atan2(closestKnifeDirection.y, closestKnifeDirection.x) * Mathf.Rad2Deg;
+                directionIndicator.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+                directionIndicator.enabled = true;
+            }
+           
+        }
+           
     }
 }
