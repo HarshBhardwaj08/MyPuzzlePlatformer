@@ -54,6 +54,7 @@ public class KnifeThrowSkills : MonoBehaviour
                 if (closestKnifeIndex != -1 && IsObjectOutOfFOV(knifeDetails[closestKnifeIndex].transform.position))
                 {
                     animator = knifeDetails[closestKnifeIndex].GetComponent<Animator>();
+                    knifeDetails[closestKnifeIndex].GetComponent<SpriteRenderer>().color = Color.red;
                     animator.SetTrigger("Teleport");
                     StartCoroutine(WaitForTeleport(0.5f, closestKnifeIndex));
                 }
@@ -64,7 +65,7 @@ public class KnifeThrowSkills : MonoBehaviour
     private int FindClosestKnifeIndex()
     {
         int closestIndex = -1;
-        float closestDistance = 1000f;
+        float closestDistance = float.MaxValue;
 
         for (int i = 0; i < knifeDetails.Count; i++)
         {
