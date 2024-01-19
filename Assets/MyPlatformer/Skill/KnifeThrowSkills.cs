@@ -44,8 +44,8 @@ public class KnifeThrowSkills : MonoBehaviour
             }
             timer = 0;
         }
-
-        if (Input.GetKeyUp(KeyCode.E))
+        
+        if (Input.GetKeyDown(KeyCode.E))
         {
             if (knifeDetails.Count > 0)
             {
@@ -54,8 +54,11 @@ public class KnifeThrowSkills : MonoBehaviour
                 {
                     animator = knifeDetails[closestKnifeIndex].GetComponent<Animator>();
                     knifeDetails[closestKnifeIndex].GetComponent<SpriteRenderer>().color = Color.red;
-                    animator.SetTrigger("Teleport");
-                    StartCoroutine(WaitForTeleport(0.5f, closestKnifeIndex));
+                   
+                     
+                        StartCoroutine(WaitForTeleport(2.0f, closestKnifeIndex));
+                    
+                  
                 }
             }
         }
@@ -96,6 +99,9 @@ public class KnifeThrowSkills : MonoBehaviour
     private IEnumerator WaitForTeleport(float sec, int i)
     {
         yield return new WaitForSeconds(sec);
+        animator.SetTrigger("Teleport");
+
+        yield return new WaitForSeconds(0.5f);
         Player.transform.position = knifeDetails[i].transform.position;
         knifeDetails.RemoveAt(i);
     }
