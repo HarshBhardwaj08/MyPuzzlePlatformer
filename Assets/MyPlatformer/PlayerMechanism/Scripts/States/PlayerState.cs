@@ -12,6 +12,7 @@ public class PlayerState
     protected bool flipSprite;
     protected bool isAttacking;
     protected float stunnedTime;
+    protected float DeacivateKamui;
 
     public PlayerState(BasePlayer player,PlayerStateMachine stateMachine , string animBoolName)
     {
@@ -22,7 +23,7 @@ public class PlayerState
    
     public virtual void playerEnter()
     {
-       
+        DeacivateKamui = 0;
         player.animator.SetBool(animboolname, true);
         rg2d = player.rg2D;
         isAttacking = false;
@@ -40,7 +41,13 @@ public class PlayerState
         InputX = Input.GetAxis("Horizontal");
         if(InputX != 0)
         flipSprite = (InputX >= 0);
-     
+        DeacivateKamui += Time.deltaTime;
+        if (DeacivateKamui >= 10.0f)
+        {
+          //  player.Kamui.SetActive(false);
+            DeacivateKamui = 0;
+        }
+
     }
     public virtual void IsAttacking() => isAttacking = true;
 }

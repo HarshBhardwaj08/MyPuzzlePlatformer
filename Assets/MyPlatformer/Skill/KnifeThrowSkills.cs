@@ -5,43 +5,42 @@ using UnityEngine.UI;
 
 public class KnifeThrowSkills : MonoBehaviour 
 {
-    public GameObject Knifes;
-    public GameObject Player;
+    public UnityEngine.GameObject Knifes;
+    public UnityEngine.GameObject Player;
     public Image directionIndicator;
     [SerializeField] private Transform transformKnife;
     [SerializeField] private float power;
-    public List<GameObject> knifeDetails = new List<GameObject>();
-    [SerializeField] private int count = 0;
+    public List<UnityEngine.GameObject> knifeDetails = new List<UnityEngine.GameObject>();
     private float timer = 0;
-    private bool isThrow;
+ 
     private Animator animator;
 
     void Update()
     {
         timer += Time.deltaTime;
-        Debug.Log(isThrow);
+       
         KnifeThrow();
-        UpdateDirectionIndicator();
+        
     }
 
     private void KnifeThrow()
     {
         if (Input.GetKeyDown(KeyCode.RightAlt) && timer > 5.0f)
         {
-            isThrow = true;
+           
             if (Player.GetComponent<SpriteRenderer>().flipX == true)
             {
-                GameObject knife = Instantiate(Knifes, transformKnife.position, Knifes.transform.rotation);
+                UnityEngine.GameObject knife = Instantiate(Knifes, transformKnife.position, Knifes.transform.rotation);
                 KnifeThrow(knife, 1);
                 knifeDetails.Add(knife);
-                count++;
+               
             }
             else
             {
-                GameObject knife = Instantiate(Knifes, transformKnife.position, Quaternion.Euler(0, 0f, -90.0f));
+                UnityEngine.GameObject knife = Instantiate(Knifes, transformKnife.position, Quaternion.Euler(0, 0f, -90.0f));
                 KnifeThrow(knife, -1);
                 knifeDetails.Add(knife);
-                count++;
+                
             }
             timer = 0;
         }
@@ -87,7 +86,7 @@ public class KnifeThrowSkills : MonoBehaviour
         return (screenPoint.x > 0f && screenPoint.x < 1f);
     }
 
-    private void KnifeThrow(GameObject knife, float dir)
+    private void KnifeThrow(UnityEngine.GameObject knife, float dir)
     {
         Rigidbody2D rb2d = knife.GetComponent<Rigidbody2D>();
         animator = knife.GetComponent<Animator>();
@@ -101,20 +100,20 @@ public class KnifeThrowSkills : MonoBehaviour
         knifeDetails.RemoveAt(i);
     }
 
-    private void UpdateDirectionIndicator()
-    {
-        if (knifeDetails.Count > 0)
-        {
-            for (int i = 0; i < knifeDetails.Count; i++)
-            {
-                float distance = Vector3.Distance(Player.transform.position, knifeDetails[i].transform.position);
-                Vector3 closestKnifeDirection = knifeDetails[i].transform.position - Player.transform.position;
-                float angle = Mathf.Atan2(closestKnifeDirection.y, closestKnifeDirection.x) * Mathf.Rad2Deg;
-                directionIndicator.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-                directionIndicator.enabled = true;
-            }
+    //private void UpdateDirectionIndicator()
+    //{
+    //    if (knifeDetails.Count > 0)
+    //    {
+    //        for (int i = 0; i < knifeDetails.Count; i++)
+    //        {
+    //            float distance = Vector3.Distance(Player.transform.position, knifeDetails[i].transform.position);
+    //            Vector3 closestKnifeDirection = knifeDetails[i].transform.position - Player.transform.position;
+    //            float angle = Mathf.Atan2(closestKnifeDirection.y, closestKnifeDirection.x) * Mathf.Rad2Deg;
+    //            directionIndicator.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+    //            directionIndicator.enabled = true;
+    //        }
            
-        }
+    //    }
            
-    }
+    //}
 }

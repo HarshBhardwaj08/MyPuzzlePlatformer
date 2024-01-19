@@ -25,7 +25,7 @@ namespace TMPro.Examples
                 if (SpawnType == 0)
                 {
                     // TextMesh Pro Implementation
-                    GameObject go = new GameObject();
+                    UnityEngine.GameObject go = new UnityEngine.GameObject();
                     go.transform.position = new Vector3(Random.Range(-95f, 95f), 0.25f, Random.Range(-95f, 95f));
 
                     TextMeshPro textMeshPro = go.AddComponent<TextMeshPro>();
@@ -49,7 +49,7 @@ namespace TMPro.Examples
                 else if (SpawnType == 1)
                 {
                     // TextMesh Implementation
-                    GameObject go = new GameObject();
+                    UnityEngine.GameObject go = new UnityEngine.GameObject();
                     go.transform.position = new Vector3(Random.Range(-95f, 95f), 0.25f, Random.Range(-95f, 95f));
 
                     TextMesh textMesh = go.AddComponent<TextMesh>();
@@ -69,14 +69,14 @@ namespace TMPro.Examples
                 else if (SpawnType == 2)
                 {
                     // Canvas WorldSpace Camera
-                    GameObject go = new GameObject();
+                    UnityEngine.GameObject go = new UnityEngine.GameObject();
                     Canvas canvas = go.AddComponent<Canvas>();
                     canvas.worldCamera = Camera.main;
 
                     go.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                     go.transform.position = new Vector3(Random.Range(-95f, 95f), 5f, Random.Range(-95f, 95f));
 
-                    TextMeshProUGUI textObject = new GameObject().AddComponent<TextMeshProUGUI>();
+                    TextMeshProUGUI textObject = new UnityEngine.GameObject().AddComponent<TextMeshProUGUI>();
                     textObject.rectTransform.SetParent(go.transform, false);
 
                     textObject.color = new Color32(255, 255, 0, 255);

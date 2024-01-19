@@ -30,7 +30,7 @@ namespace TMPro.Examples
 
             Application.targetFrameRate = 1000;
 
-            GameObject frameCounter = new GameObject("Frame Counter");
+            UnityEngine.GameObject frameCounter = new UnityEngine.GameObject("Frame Counter");
             m_frameCounter_transform = frameCounter.AddComponent<RectTransform>();
 
             m_frameCounter_transform.SetParent(this.transform, false);

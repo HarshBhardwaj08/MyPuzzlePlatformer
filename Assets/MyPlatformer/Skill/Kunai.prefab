@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2359159408350144389}
   m_Layer: 0
   m_Name: Kunai
-  m_TagString: Untagged
+  m_TagString: FireBall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -213,6 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 807eb06fde5733646ade6001be631ff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceOfKnife: {x: 0, y: 0, z: 0}
 --- !u!50 &-2939880405106422059
 Rigidbody2D:
   serializedVersion: 4
@@ -235,7 +236,7 @@ Rigidbody2D:
     m_Bits: 1015
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 136
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1

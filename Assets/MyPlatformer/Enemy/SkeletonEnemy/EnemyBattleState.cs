@@ -15,7 +15,7 @@ public class EnemyBattleState : EnemyState
     public override void playerEnter()
     {
         base.playerEnter();
-        player = GameObject.Find("Player1").transform;
+        player = UnityEngine.GameObject.Find("Player1").transform;
     }
 
     public override void playerExit()
@@ -37,10 +37,14 @@ public class EnemyBattleState : EnemyState
                 enemystateMachine.ChangeState(skeletonEnemy.enemyAttackState);
                     return;
             }
-            else if (Vector2.Distance(skeletonEnemy.transform.position, skeletonEnemy.transform.position) > 7.0f)
-                {
+            //else if (Vector2.Distance(skeletonEnemy.transform.position, skeletonEnemy.transform.position) > 5.0f)
+            //    {
+            //        enemystateMachine.ChangeState(skeletonEnemy.enemyShootState);
+            //    }
+            else if(Vector2.Distance(skeletonEnemy.transform.position, skeletonEnemy.transform.position) > 7.0f)
+            {
                     enemystateMachine.ChangeState(skeletonEnemy.enemyIdle);
-                }
+            }
         } 
 
        

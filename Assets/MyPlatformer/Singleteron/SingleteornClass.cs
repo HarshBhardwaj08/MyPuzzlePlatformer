@@ -20,7 +20,7 @@ public class SingleteornClass<T> : MonoBehaviour where T : Component
                 _instance = FindObjectOfType<T>();
                 if (_instance == null)
                 {
-                    GameObject obj = new GameObject(typeof(T).Name);
+                    UnityEngine.GameObject obj = new UnityEngine.GameObject(typeof(T).Name);
                     _instance = obj.AddComponent<T>();
                 }
             }

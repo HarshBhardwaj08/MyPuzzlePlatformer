@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BasePlayer :Entity
 {
-    public GameObject throwpoint;
+    public UnityEngine.GameObject throwpoint;
 
     #region States
     public PlayerIdleState idleState { get; set; }
@@ -17,7 +17,7 @@ public class BasePlayer :Entity
     public PlayerSwordThrowState PlayerSwordThrowState { get; set; }
     public PlayerCatchState PlayerCatchState { get; set; }
     #endregion
-  
+    public GameObject Kamui;
   protected HellPlayer hellPlayer { get; set; }
   protected HeavenPlayer heavenPlayer { get; set; }  
 

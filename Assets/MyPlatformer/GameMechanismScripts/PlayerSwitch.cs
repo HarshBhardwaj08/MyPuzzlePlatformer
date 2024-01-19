@@ -5,8 +5,8 @@ using Cinemachine;
 
 public class PlayerSwitch : MonoBehaviour
 {
-    public GameObject HeavenPlayer;
-    public GameObject HellPlayer;
+    public UnityEngine.GameObject HeavenPlayer;
+    public UnityEngine.GameObject HellPlayer;
     private HeavenPlayer player1;
     private HellPlayer player2;
     public CinemachineVirtualCamera followcam;

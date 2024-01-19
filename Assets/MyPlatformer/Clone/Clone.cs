@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Clone : Skill
 {
-    public GameObject playerPrefab;
-    public GameObject player;
+    public UnityEngine.GameObject playerPrefab;
+    public UnityEngine.GameObject player;
     public float cloneSpeed = 5f;
     float timer;
     private void Start()
     {
-        player = GameObject.Find("Player1").gameObject;
+        player = UnityEngine.GameObject.Find("Player1").gameObject;
     }
     public override  void  Update()
     {
@@ -23,10 +23,10 @@ public class Clone : Skill
         }
     }
 
-    void ClonePlayer(GameObject player)
+    void ClonePlayer(UnityEngine.GameObject player)
     {
-       
-        GameObject clone = Instantiate(playerPrefab, player.transform.position ,player.transform.rotation);
+
+        UnityEngine.GameObject clone = Instantiate(playerPrefab, player.transform.position , player.transform.rotation);
         if (player.GetComponent<SpriteRenderer>().flipX == true)
         {
             clone.GetComponent<SpriteRenderer>().flipX = true;

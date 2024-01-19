@@ -32,7 +32,7 @@ namespace TMPro.Examples
             m_camera = Camera.main;
             Application.targetFrameRate = 9999;
 
-            GameObject frameCounter = new GameObject("Frame Counter");
+            UnityEngine.GameObject frameCounter = new UnityEngine.GameObject("Frame Counter");
 
             m_TextMeshPro = frameCounter.AddComponent<TextMeshPro>();
             m_TextMeshPro.font = Resources.Load<TMP_FontAsset>("Fonts & Materials/LiberationSans SDF");

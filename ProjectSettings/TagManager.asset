@@ -9,6 +9,7 @@ TagManager:
   - SkillManager
   - Cystals
   - Ground
+  - FireBall
   layers:
   - Default
   - TransparentFX
@@ -66,4 +67,7 @@ TagManager:
     locked: 0
   - name: Enemy
     uniqueID: 1687579605
+    locked: 0
+  - name: Throwables
+    uniqueID: 577500915
     locked: 0

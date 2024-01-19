@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SwordSkill : Skill
 {
-    [SerializeField] private GameObject swordPrefab;
+    [SerializeField] private UnityEngine.GameObject swordPrefab;
     [SerializeField] Vector2 LaunchDirection;
     [SerializeField] float gravity;
     
@@ -12,10 +12,10 @@ public class SwordSkill : Skill
     [Header("AimDots")]
     [SerializeField] private int numberofDots;
     [SerializeField] private float spaceBetweenDots;
-    [SerializeField] private GameObject dotsPrefabs;
+    [SerializeField] private UnityEngine.GameObject dotsPrefabs;
     [SerializeField] private Transform dotsparent;
     [SerializeField] Vector2 offset;
-    private GameObject[] dots;
+    private UnityEngine.GameObject[] dots;
     private void Start()
     {
         GenerateDots();
@@ -60,7 +60,7 @@ public class SwordSkill : Skill
     }
     public void GenerateDots()
     {
-        dots = new GameObject[numberofDots];
+        dots = new UnityEngine.GameObject[numberofDots];
 
         for(int i = 0; i < numberofDots; i++)
         {

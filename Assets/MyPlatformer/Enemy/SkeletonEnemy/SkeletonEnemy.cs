@@ -9,13 +9,19 @@ public class SkeletonEnemy : Enemy
     public EnemyAttackState enemyAttackState;
     public EnemyBattleState enemyBattleState;
     public EnemyStunnedState enemyStunnedState;
+    public EnemyShootState enemyShootState;
     public bool isFlip;
-  
+
+    public GameObject player;
     public bool isGround;
     public bool isWallDetected;
     public float attackDistance;
     public float distance;
-   
+    public float throwRadius;
+    public List<GameObject> projectile = new List<GameObject>();
+  
+    float throwCountDowm;
+    SpriteRenderer playersprite;
     public override void Awake()
     {
         base.Awake();
@@ -24,6 +30,7 @@ public class SkeletonEnemy : Enemy
         enemyBattleState = new EnemyBattleState(this, enemyStateMachine, "Walk", this);
         enemyAttackState = new EnemyAttackState(this, enemyStateMachine, "Attack", this);
         enemyStunnedState = new EnemyStunnedState(this, enemyStateMachine, "Hurt", this);
+        enemyShootState = new EnemyShootState(this, enemyStateMachine, "Throw", this);
     }
 
    
@@ -33,7 +40,7 @@ public class SkeletonEnemy : Enemy
         base.Start();
         enemyStateMachine.EnterState(enemyIdle);
         initalColor = _spriteRenderer.color;
-
+        
     }
 
     public override void Update()
@@ -46,7 +53,17 @@ public class SkeletonEnemy : Enemy
         }
        isGround = IsGrounded();
        isWallDetected = IsWallDetected();
-       playerSeen = isPlayerDetected();
+
+       
+
+        throwCountDowm += Time.deltaTime;
+       
+        if (isPlayerRange() == true && throwCountDowm >5 )
+        {
+            ThrowProjectile(playerDir);
+
+            throwCountDowm = 0;
+        }
         
     }
     
@@ -62,5 +79,24 @@ public class SkeletonEnemy : Enemy
         setVelocity(knockback.x,knockback.y);
       
     }
-    
+    RaycastHit2D isPlayerRange()
+    {
+        return Physics2D.Raycast(this.transform.position, Vector2.right *playerDir, throwRadius, playerLayerMask);
+
+    }
+    public void ThrowProjectile(float dir)
+    {
+        int RandomProjectile = Random.Range(0, projectile.Count);
+        GameObject FireBall = Instantiate(projectile[RandomProjectile], playerDetected.transform.position, projectile[RandomProjectile].transform.rotation);
+        FireBall.GetComponent<Rigidbody2D>().velocity = new Vector2(20.0f*playerDir, 0);
+       
+    }
+
+    public override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+
+        Gizmos.DrawLine(this.transform.position,this.transform.position + new Vector3(throwRadius*playerDir,0,0) );
+    }
+
 }

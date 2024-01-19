@@ -13,6 +13,7 @@ public class PlayerGroundedState : PlayerState
     public override void playerEnter()
     {
         base.playerEnter();
+        
     }
 
     public override void playerExit()
@@ -24,7 +25,11 @@ public class PlayerGroundedState : PlayerState
     {
         base.PlayerUpdate();
         if (Input.GetKeyDown(KeyCode.Space) && player.IsGrounded() == true) { stateMachine.ChangeState(player.jumpstate); }
-
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            player.Kamui.SetActive(true);
+        }
+       
         if (Input.GetKeyDown(KeyCode.Mouse0)) { stateMachine.ChangeState(player.attackState); }
         if(Input.GetKey(KeyCode.Mouse1))
         {

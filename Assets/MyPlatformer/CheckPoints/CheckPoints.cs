@@ -7,7 +7,7 @@ using UnityEngine;
 public class CheckPoints : MonoBehaviour
 {
     public Sprite CheckpointspriteOn, CheckpointSpriteOff;
-    public GameObject coinManger;
+    public UnityEngine.GameObject coinManger;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")

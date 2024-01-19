@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BlackHoleController : MonoBehaviour
 {
-    [SerializeField] GameObject Clones;
-    [SerializeField] GameObject hotkeysPrefabs;
+    [SerializeField] UnityEngine.GameObject Clones;
+    [SerializeField] UnityEngine.GameObject hotkeysPrefabs;
     [SerializeField] private List<KeyCode> keyCodeslist;
     public float minSize;
     public float maxSize;
@@ -13,7 +13,7 @@ public class BlackHoleController : MonoBehaviour
     public bool canGrow;
 
     public List<Transform> enemies = new List<Transform>();
-    public List<GameObject> blackHoleHotKeys = new List<GameObject>();
+    public List<UnityEngine.GameObject> blackHoleHotKeys = new List<UnityEngine.GameObject>();
     private void OnEnable()
     {
        //SignalManager.Instance.SubscribeToPublishers(this);
@@ -46,7 +46,7 @@ public class BlackHoleController : MonoBehaviour
         {
           
             collision.gameObject.GetComponent<SkeletonEnemy>().freezeEnemy(true);
-            GameObject newHotKey = Instantiate(hotkeysPrefabs, collision.transform.position + new Vector3(0, 1.0f), Quaternion.identity);
+            UnityEngine.GameObject newHotKey = Instantiate(hotkeysPrefabs, collision.transform.position + new Vector3(0, 1.0f), Quaternion.identity);
             blackHoleHotKeys.Add(newHotKey);
             KeyCode choosenkey = keyCodeslist[Random.Range(0, keyCodeslist.Count)];
             keyCodeslist.Remove(choosenkey);
