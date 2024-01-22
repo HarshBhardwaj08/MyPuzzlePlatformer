@@ -5,61 +5,114 @@ using UnityEngine.UI;
 public class Kamui : MonoBehaviour
 {
     public GameObject player;
-    public List<Transform> projectles = new List<Transform>();
+    public Text text;
+    public List<Transform> projectiles = new List<Transform>();
+    public Dictionary<string, List<Transform>> projectileHolders = new Dictionary<string, List<Transform>>();
     public Image image;
     int count;
+    bool sameSpriteSelected;
+    
     private void Update()
     {
-        
         Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-       
-        if(Input.GetAxisRaw("Mouse ScrollWheel") > 0.0f)
+
+        if (Input.GetAxisRaw("Mouse ScrollWheel") > 0.0f)
         {
-            count++;
-            if(count >= projectles.Count )
+        
+            if (sameSpriteSelected)
             {
-                count = 0;
+                count += 2;
+                sameSpriteSelected = false;
             }
-        }else if(Input.GetAxisRaw("Mouse ScrollWheel") < 0.0f)
+            else
+            {
+                count++;
+            }
+
+            count = (count) % projectiles.Count;
+        }
+        else if (Input.GetAxisRaw("Mouse ScrollWheel") < 0.0f)
         {
             count--;
+            sameSpriteSelected = false;
+        } else if (Input.GetKeyDown(KeyCode.K))
+        {
+            PrintTransformDictionary();
         }
-        image.sprite = projectles[count].GetComponent<SpriteRenderer>().sprite;
-        count = Mathf.Clamp(count, 0,projectles.Count);
-        Debug.Log(count);
+        if(projectiles.Count <= 0)
+        {
+            image.sprite = null;
+        }
+        count = Mathf.Clamp(count, 0, projectiles.Count -1);
+       
+        image.sprite = projectiles[count].GetComponent<SpriteRenderer>().sprite;
+
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            int num = count;
-            
-                if(player.GetComponent<SpriteRenderer>().flipX == true)
-                {
-                    projectles[num].gameObject.SetActive(true);
-                    projectles[num].gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                   
-                    projectles[num].gameObject.transform.position = dir;
-                    projectles[num].GetComponent<Rigidbody2D>().velocity = new Vector2(20, 0);
-                    projectles.RemoveAt(num);
-                }
-                else
-                {
-                    projectles[num].gameObject.SetActive(true);
-                    projectles[num].gameObject.GetComponent<SpriteRenderer>().flipX = true;
-                    projectles[num].gameObject.transform.position = dir;
-                    projectles[num].GetComponent<Rigidbody2D>().velocity = new Vector2(-20, 0);
-                    projectles.RemoveAt(num);
-                }
-               
-            
+            ThrowProjectile(dir);
+        }
+      
+    }
 
+    private void ThrowProjectile(Vector2 dir)
+    {
+        if (projectiles.Count > 0)
+        {
+            int num = count;
+            bool flipX = player.GetComponent<SpriteRenderer>().flipX;
            
+            projectiles[num].gameObject.SetActive(true);
+            projectiles[num].gameObject.GetComponent<SpriteRenderer>().flipX = flipX;
+            projectiles[num].gameObject.transform.position = dir;
+
+            float velocityX = flipX ? -20f : 20f;
+            projectiles[num].GetComponent<Rigidbody2D>().velocity = new Vector2(velocityX, 0);
+
+            projectiles.RemoveAt(num);
         }
     }
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "FireBall")
+        if (collision.gameObject.tag == "FireBall")
         {
-            projectles.Add(collision.transform);
+            string ProjectileName = collision.transform.name;
+            if (!projectileHolders.ContainsKey(ProjectileName))
+            {
+         
+                projectileHolders[ProjectileName]  = new List<Transform>();
+            }
+            projectileHolders[ProjectileName].Add(collision.transform);
+            text.text = projectileHolders[ProjectileName].Count.ToString();
+            if (projectileHolders.ContainsKey("Knife"))
+            {
+                text.text = projectileHolders["knife"].Count.ToString();
+            }
+
+            projectiles.Add(collision.transform);
+             
             collision.gameObject.SetActive(false);
+        }
+    }
+
+    private void updateUI(string name)
+    {
+       
+    }
+   
+
+    private void PrintTransformDictionary()
+    {
+       
+        foreach (var kvp in projectileHolders)
+        {
+            Debug.Log("Key: " + kvp.Key);
+            foreach (Transform transform in kvp.Value)
+            {
+                
+                Debug.Log("  Transform: " + transform.name);
+            }
         }
     }
 }
