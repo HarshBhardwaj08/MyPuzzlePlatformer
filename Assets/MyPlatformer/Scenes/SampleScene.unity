@@ -5250,6 +5250,10 @@ PrefabInstance:
       propertyPath: image
       value: 
       objectReference: {fileID: 801007765}
+    - target: {fileID: 7978602020590760717, guid: bd2138714914642ffb5a5b671659bd09, type: 3}
+      propertyPath: Uitext
+      value: 
+      objectReference: {fileID: 667101718}
     - target: {fileID: 8417554400990850594, guid: bd2138714914642ffb5a5b671659bd09, type: 3}
       propertyPath: m_Name
       value: Player1

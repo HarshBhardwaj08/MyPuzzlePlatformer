@@ -5,60 +5,48 @@ using UnityEngine.UI;
 public class Kamui : MonoBehaviour
 {
     public GameObject player;
-    public Text text;
-    public List<Transform> projectiles = new List<Transform>();
+    public Text Uitext;
+   // public List<Transform> projectiles = new List<Transform>();
     public Dictionary<string, List<Transform>> projectileHolders = new Dictionary<string, List<Transform>>();
     public Image image;
-    int count;
-    bool sameSpriteSelected;
+ 
     
+   public enum Projectiles
+    {
+        Sword,
+        FireBall,  
+        Kunai,
+    }
     private void Update()
     {
         Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         if (Input.GetAxisRaw("Mouse ScrollWheel") > 0.0f)
         {
-        
-            if (sameSpriteSelected)
-            {
-                count += 2;
-                sameSpriteSelected = false;
-            }
-            else
-            {
-                count++;
-            }
 
-            count = (count) % projectiles.Count;
         }
+
         else if (Input.GetAxisRaw("Mouse ScrollWheel") < 0.0f)
         {
-            count--;
-            sameSpriteSelected = false;
-        } else if (Input.GetKeyDown(KeyCode.K))
-        {
-            PrintTransformDictionary();
-        }
-        if(projectiles.Count <= 0)
+        } 
+       
+        /*if(projectiles.Count <= 0)
         {
             image.sprite = null;
-        }
-        count = Mathf.Clamp(count, 0, projectiles.Count -1);
-       
-        image.sprite = projectiles[count].GetComponent<SpriteRenderer>().sprite;
-
+        }*/
+      
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            ThrowProjectile(dir);
+          //  ThrowProjectile(dir);
         }
       
     }
 
-    private void ThrowProjectile(Vector2 dir)
+   /* private void ThrowProjectile(Vector2 dir)
     {
         if (projectiles.Count > 0)
         {
-            int num = count;
+            int num = 1;
             bool flipX = player.GetComponent<SpriteRenderer>().flipX;
            
             projectiles[num].gameObject.SetActive(true);
@@ -70,7 +58,7 @@ public class Kamui : MonoBehaviour
 
             projectiles.RemoveAt(num);
         }
-    }
+    }*/
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -78,19 +66,18 @@ public class Kamui : MonoBehaviour
         if (collision.gameObject.tag == "FireBall")
         {
             string ProjectileName = collision.transform.name;
+             
             if (!projectileHolders.ContainsKey(ProjectileName))
             {
          
                 projectileHolders[ProjectileName]  = new List<Transform>();
             }
             projectileHolders[ProjectileName].Add(collision.transform);
-            text.text = projectileHolders[ProjectileName].Count.ToString();
-            if (projectileHolders.ContainsKey("Knife"))
-            {
-                text.text = projectileHolders["knife"].Count.ToString();
-            }
-
-            projectiles.Add(collision.transform);
+            // Uitext.text = projectileHolders[ProjectileName].Count.ToString();
+            //  updateUI("Kunai");
+            //  updateUI("Sword");
+            updateUI("FireBall");
+         //   projectiles.Add(collision.transform);
              
             collision.gameObject.SetActive(false);
         }
@@ -98,20 +85,26 @@ public class Kamui : MonoBehaviour
 
     private void updateUI(string name)
     {
-       
+        name = name + "(Clone)";
+        Debug.Log(name);
+        if ( projectileHolders.ContainsKey(name))
+        {
+            image.sprite = projectileHolders[name][0].GetComponent<SpriteRenderer>().sprite;
+            Uitext.text = projectileHolders[name].Count.ToString();
+          
+        }
     }
    
 
-    private void PrintTransformDictionary()
+    private void DisableClone()
     {
        
         foreach (var kvp in projectileHolders)
         {
-            Debug.Log("Key: " + kvp.Key);
+         
             foreach (Transform transform in kvp.Value)
             {
-                
-                Debug.Log("  Transform: " + transform.name);
+               transform.gameObject.SetActive(false);
             }
         }
     }
