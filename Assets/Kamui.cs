@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ public class Kamui : MonoBehaviour
 {
     public GameObject player;
     public Text Uitext;
-   // public List<Transform> projectiles = new List<Transform>();
+    public List<Transform> projectiles = new List<Transform>();
     public Dictionary<string, List<Transform>> projectileHolders = new Dictionary<string, List<Transform>>();
     public Image image;
  
@@ -17,48 +18,73 @@ public class Kamui : MonoBehaviour
         FireBall,  
         Kunai,
     }
+
+    private Projectiles CurrentprojectilesValue;
+    private void Start()
+    {
+        CurrentprojectilesValue = Projectiles.Sword;
+    }
     private void Update()
     {
         Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (Input.GetAxisRaw("Mouse ScrollWheel") > 0.0f)
-        {
+        float scrollInput = Input.GetAxis("Mouse ScrollWheel");
 
+
+        if (scrollInput > 0f)
+        {
+            IterateEnums(true);
         }
 
-        else if (Input.GetAxisRaw("Mouse ScrollWheel") < 0.0f)
-        {
-        } 
-       
         /*if(projectiles.Count <= 0)
         {
             image.sprite = null;
         }*/
-      
+
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
           //  ThrowProjectile(dir);
         }
       
     }
-
-   /* private void ThrowProjectile(Vector2 dir)
+    private void IterateEnums(bool forward)
     {
-        if (projectiles.Count > 0)
+        int currentIndex = (int)CurrentprojectilesValue ;
+        int enumLength = Enum.GetValues(typeof(Projectiles)).Length;
+
+        int nextIndex;
+
+        if (forward)
         {
-            int num = 1;
-            bool flipX = player.GetComponent<SpriteRenderer>().flipX;
-           
-            projectiles[num].gameObject.SetActive(true);
-            projectiles[num].gameObject.GetComponent<SpriteRenderer>().flipX = flipX;
-            projectiles[num].gameObject.transform.position = dir;
-
-            float velocityX = flipX ? -20f : 20f;
-            projectiles[num].GetComponent<Rigidbody2D>().velocity = new Vector2(velocityX, 0);
-
-            projectiles.RemoveAt(num);
+            nextIndex = (currentIndex + 1) % enumLength;
         }
-    }*/
+        else
+        {
+            nextIndex = (currentIndex - 1 + enumLength) % enumLength;
+        }
+
+        CurrentprojectilesValue = (Projectiles)nextIndex;
+        updateUI(CurrentprojectilesValue.ToString());
+        Debug.Log("Current Enum Value: " + CurrentprojectilesValue);
+    }
+
+    /* private void ThrowProjectile(Vector2 dir)
+     {
+         if (projectiles.Count > 0)
+         {
+             int num = 1;
+             bool flipX = player.GetComponent<SpriteRenderer>().flipX;
+
+             projectiles[num].gameObject.SetActive(true);
+             projectiles[num].gameObject.GetComponent<SpriteRenderer>().flipX = flipX;
+             projectiles[num].gameObject.transform.position = dir;
+
+             float velocityX = flipX ? -20f : 20f;
+             projectiles[num].GetComponent<Rigidbody2D>().velocity = new Vector2(velocityX, 0);
+
+             projectiles.RemoveAt(num);
+         }
+     }*/
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -77,7 +103,7 @@ public class Kamui : MonoBehaviour
             //  updateUI("Kunai");
             //  updateUI("Sword");
             updateUI("FireBall");
-         //   projectiles.Add(collision.transform);
+            projectiles.Add(collision.transform);
              
             collision.gameObject.SetActive(false);
         }
