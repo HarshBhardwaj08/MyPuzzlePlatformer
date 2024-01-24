@@ -43,7 +43,8 @@ public class Kamui : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-          //  ThrowProjectile(dir);
+            Debug.Log(CurrentprojectilesValue);
+            ThrowProjectile(CurrentprojectilesValue.ToString(),dir);
         }
       
     }
@@ -64,8 +65,24 @@ public class Kamui : MonoBehaviour
         }
 
         CurrentprojectilesValue = (Projectiles)nextIndex;
-        updateUI(CurrentprojectilesValue.ToString());
-        Debug.Log("Current Enum Value: " + CurrentprojectilesValue);
+        UpdateUI(CurrentprojectilesValue.ToString());
+        //Debug.Log("Current Enum Value: " + CurrentprojectilesValue);
+    }
+
+    private void ThrowProjectile(string name,Vector2 dir)
+    {
+        name = name + "(Clone)";
+        Debug.Log(name);
+        if (projectileHolders.ContainsKey(name))
+        {
+           
+            int val = projectileHolders[name].Count - 1;
+            projectileHolders[name][val].gameObject.SetActive(true);
+            projectileHolders[name][val].gameObject.transform.position = dir;
+            projectileHolders[name][val].GetComponent<Rigidbody2D>().velocity = new Vector2(-20f, 0);
+            projectileHolders[name].RemoveAt(val);
+            UpdateUI(CurrentprojectilesValue.ToString());
+        }
     }
 
     /* private void ThrowProjectile(Vector2 dir)
@@ -99,29 +116,32 @@ public class Kamui : MonoBehaviour
                 projectileHolders[ProjectileName]  = new List<Transform>();
             }
             projectileHolders[ProjectileName].Add(collision.transform);
-            // Uitext.text = projectileHolders[ProjectileName].Count.ToString();
-            //  updateUI("Kunai");
-            //  updateUI("Sword");
-            updateUI("FireBall");
+           
             projectiles.Add(collision.transform);
              
             collision.gameObject.SetActive(false);
         }
     }
 
-    private void updateUI(string name)
+    private void UpdateUI(string name)
     {
         name = name + "(Clone)";
-        Debug.Log(name);
+       // Debug.Log(name);
         if ( projectileHolders.ContainsKey(name))
         {
-            image.sprite = projectileHolders[name][0].GetComponent<SpriteRenderer>().sprite;
-            Uitext.text = projectileHolders[name].Count.ToString();
-          
+            if (projectileHolders[name].Count > 0)
+            {
+                image.sprite = projectileHolders[name][0].GetComponent<SpriteRenderer>().sprite;
+                Uitext.text = projectileHolders[name].Count.ToString();
+            }
+            else
+            {
+                image.sprite = null;
+                Uitext.text = "0" ;
+            }
         }
     }
    
-
     private void DisableClone()
     {
        
