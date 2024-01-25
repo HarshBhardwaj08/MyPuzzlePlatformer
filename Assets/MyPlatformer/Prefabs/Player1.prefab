@@ -80,7 +80,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3670924238391804276
 Transform:
   m_ObjectHideFlags: 0
@@ -196,7 +196,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 8417554400990850594}
-  projectles: []
+  Uitext: {fileID: 0}
+  projectiles: []
+  image: {fileID: 0}
 --- !u!1 &7337497735103349916
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,7 +428,7 @@ MonoBehaviour:
   attackpoint: {fileID: 8657500652593607097}
   AttackRadius: 0.5
   throwpoint: {fileID: 8942400197327629071}
-  Kamui: {fileID: 0}
+  Kamui: {fileID: 5295136893259590139}
   onGround: 0
   shootParent: {fileID: 80340271741535538}
 --- !u!1 &8942400197327629071
