@@ -43,7 +43,7 @@ public class Kamui : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Debug.Log(CurrentprojectilesValue);
+           // Debug.Log(CurrentprojectilesValue);
             ThrowProjectile(CurrentprojectilesValue.ToString(),dir);
         }
       
@@ -71,7 +71,7 @@ public class Kamui : MonoBehaviour
 
     private void ThrowProjectile(string name,Vector2 dir)
     {
-        name = name + "(Clone)";
+       
         Debug.Log(name);
         if (projectileHolders.ContainsKey(name))
         {
@@ -109,14 +109,16 @@ public class Kamui : MonoBehaviour
         if (collision.gameObject.tag == "FireBall")
         {
             string ProjectileName = collision.transform.name;
-             
-            if (!projectileHolders.ContainsKey(ProjectileName))
+            string names =  ProjectileName.Replace("(Clone)", "");
+         
+            if (!projectileHolders.ContainsKey(names))
             {
          
-                projectileHolders[ProjectileName]  = new List<Transform>();
+                projectileHolders[names]  = new List<Transform>();
             }
-            projectileHolders[ProjectileName].Add(collision.transform);
-           
+            projectileHolders[names].Add(collision.transform);
+            
+            UpdateUI(names);
             projectiles.Add(collision.transform);
              
             collision.gameObject.SetActive(false);
@@ -125,8 +127,7 @@ public class Kamui : MonoBehaviour
 
     private void UpdateUI(string name)
     {
-        name = name + "(Clone)";
-       // Debug.Log(name);
+       
         if ( projectileHolders.ContainsKey(name))
         {
             if (projectileHolders[name].Count > 0)
