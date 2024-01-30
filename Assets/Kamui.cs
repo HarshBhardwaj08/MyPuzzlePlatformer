@@ -8,9 +8,10 @@ public class Kamui : MonoBehaviour
     public GameObject player;
     public Text Uitext;
     public List<Transform> projectiles = new List<Transform>();
+    public List<string> projectileName = new List<string>();
     public Dictionary<string, List<Transform>> projectileHolders = new Dictionary<string, List<Transform>>();
     public Image image;
- 
+    public int count = 0;
     
    public enum Projectiles
     {
@@ -33,9 +34,11 @@ public class Kamui : MonoBehaviour
 
         if (scrollInput > 0f)
         {
-            IterateEnums(true);
-        }
 
+            IterateCount(true); 
+           // IterateEnums(true);
+        }
+       
         /*if(projectiles.Count <= 0)
         {
             image.sprite = null;
@@ -43,10 +46,31 @@ public class Kamui : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-           // Debug.Log(CurrentprojectilesValue);
-            ThrowProjectile(CurrentprojectilesValue.ToString(),dir);
+            // Debug.Log(CurrentprojectilesValue);
+            ThrowProjectile(projectileName[count] ,dir);
         }
       
+    }
+    private void IterateCount(bool forward)
+    {
+        int currentIndex = count;
+        int enumLength = projectileName.Count;
+
+        int nextIndex;
+
+        if (forward)
+        {
+            nextIndex = (currentIndex + 1) % enumLength;
+        }
+        else
+        {
+            nextIndex = (currentIndex - 1 + enumLength) % enumLength;
+        }
+        count = nextIndex;
+      
+        UpdateUI(projectileName[count].ToString());
+
+        
     }
     private void IterateEnums(bool forward)
     {
@@ -81,6 +105,7 @@ public class Kamui : MonoBehaviour
             projectileHolders[name][val].gameObject.transform.position = dir;
             projectileHolders[name][val].GetComponent<Rigidbody2D>().velocity = new Vector2(-20f, 0);
             projectileHolders[name].RemoveAt(val);
+            
             UpdateUI(CurrentprojectilesValue.ToString());
         }
     }
@@ -110,7 +135,11 @@ public class Kamui : MonoBehaviour
         {
             string ProjectileName = collision.transform.name;
             string names =  ProjectileName.Replace("(Clone)", "");
-         
+            if (!projectileName.Contains(names))
+            {
+                projectileName.Add(names);
+            }
+
             if (!projectileHolders.ContainsKey(names))
             {
          
